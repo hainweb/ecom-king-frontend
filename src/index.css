@@ -1,0 +1,29 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Disable hover effects for mobile devices */
+@media (max-width: 768px) {
+    .group:hover .group-hover\:scale-110 {
+      transform: none !important;
+    }
+  }
+  
+  /* Add this to your CSS file */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for webkit browsers */
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;  /* Hide scrollbar in IE/Edge */
+  scrollbar-width: none;  /* Hide scrollbar in Firefox */
+}
+
+.truncate-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
