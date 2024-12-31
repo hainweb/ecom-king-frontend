@@ -1,103 +1,103 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BASE_URL } from '../Urls/Urls';
+import { BASE_URL, IMG_URL } from '../Urls/Urls';
 import { Link } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
-
-const Slider = lazy(() => import('./Slider'));
-const BestOfElectronic = lazy(() => import('./BestOfElectronic'));
-const ExploreMore = lazy(() => import('./ExploreMore'));
-const Footer = lazy(() => import('../Footer/Footer'));
+import { Slider } from './Slider'
+import BestOfElectronic from './BestOfElectronic';
+import ExploreMore from './ExploreMore';
+import Footer from '../Footer/Footer';
 
 const ProductAndCategoryList = ({ setCartCount }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [user, setUser] = useState('');
-  const [loading, setLoading] = useState({ products: true, categories: true });
-  const [errors, setErrors] = useState({ products: null, categories: null });
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [errorProducts, setErrorProducts] = useState(null);
+  const [errorCategories, setErrorCategories] = useState(null);
   const [addingToCartProductId, setAddingToCartProductId] = useState(null);
   const [wishlistLoadingId, setWishlistLoadingId] = useState(null);
 
-  // Fetch categories and products
+  // Fetch Categories
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCategories = async () => {
       try {
-        const [categoryRes, productRes] = await Promise.all([
-          axios.get(`${BASE_URL}/get-categories`),
-          axios.get(`${BASE_URL}/products`, { withCredentials: true }),
-        ]);
-
-        setCategories(categoryRes.data);
-        setUser(productRes.data.user);
-        setProducts(
-          productRes.data.products.sort(() => Math.random() - 0.5).slice(0, 6)
-        );
+        const response = await axios.get(`${BASE_URL}/get-categories`);
+        setCategories(response.data); // Adjust based on API response structure
       } catch (err) {
-        setErrors({
-          categories: 'Failed to load categories',
-          products: 'Failed to load products',
-        });
+        setErrorCategories('Failed to load categories');
       } finally {
-        setLoading({ products: false, categories: false });
+        setLoadingCategories(false);
       }
     };
 
-    fetchData();
+    fetchCategories();
   }, []);
 
-  const toggleWishlist = useCallback(
-    async (event, productId) => {
-      event.preventDefault();
-      setWishlistLoadingId(productId);
-
+  // Fetch Products
+  useEffect(() => {
+    const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/add-to-Wishlist/${productId}`, { withCredentials: true });
+        const response = await axios.get(`${BASE_URL}/products`, { withCredentials: true });
+        let data = response.data.products;
+        console.log('pro res', response);
+
+        const userdata = response.data.user;
+        setUser(userdata);
+
+        // Shuffle and limit to 6 products
+        data = data.sort(() => Math.random() - 0.5).slice(0, 6);
+        setProducts(data);
+      } catch (err) {
+        setErrorProducts('Failed to load products');
+      } finally {
+        setLoadingProducts(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const toggleWishlist = (event, productId) => {
+    setWishlistLoadingId(productId);
+    event.preventDefault();
+    event.stopPropagation();
+    axios
+      .get(`${BASE_URL}/add-to-Wishlist/${productId}`, { withCredentials: true })
+      .then((response) => {
+        console.log('res wish', response);
+
         if (response.data.status) {
           setProducts((prevProducts) =>
             prevProducts.map((product) =>
-              product._id === productId
-                ? { ...product, isInWishlist: !product.isInWishlist }
-                : product
+              product._id === productId ? { ...product, isInWishlist: !product.isInWishlist } : product
             )
           );
         }
-      } catch (err) {
-        console.error('Error updating wishlist:', err);
-      } finally {
         setWishlistLoadingId(null);
-      }
-    },
-    []
-  );
+      });
+  };
 
-  const addToCart = useCallback(
-    async (productId) => {
-      setAddingToCartProductId(productId);
-
-      try {
-        const response = await axios.get(`${BASE_URL}/add-to-cart/${productId}`, { withCredentials: true });
+  const addToCart = (productId) => {
+    setAddingToCartProductId(productId);
+    axios
+      .get(`${BASE_URL}/add-to-cart/${productId}`, { withCredentials: true })
+      .then((response) => {
         if (response.data.status) {
           setCartCount((prevCount) => prevCount + 1);
         }
-      } catch (err) {
-        console.error('Error adding to cart:', err);
-      } finally {
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      })
+      .finally(() => {
         setAddingToCartProductId(null);
-      }
-    },
-    [setCartCount]
-  );
+      });
+  };
 
-  const truncateText = (text, length) => (text.length > length ? `${text.substring(0, length)}...` : text);
-
-  const loadingPlaceholder = useMemo(
-    () => (
-      <div className="flex justify-center items-center py-12">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600"></div>
-      </div>
-    ),
-    []
-  );
+  const truncateText = (text, length) => {
+    return text.length > length ? `${text.substring(0, length)}...` : text;
+  };
 
   return (
     <div className="transition-all duration-300 mt-5">
@@ -110,7 +110,13 @@ const ProductAndCategoryList = ({ setCartCount }) => {
       <div className="category-list py-8 bg-gray-100 dark:bg-gray-800">
 
         <div className="container mx-auto px-4">
-        
+          {loadingCategories ? (
+            <div className="flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600"></div>
+            </div>
+          ) : errorCategories ? (
+            <div className="text-red-500 text-center">{errorCategories}</div>
+          ) : (
             <div className="overflow-x-auto scrollbar-hidden">
               <div className="flex space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10 min-w-max">
                 {categories.map((category) => (
@@ -129,7 +135,7 @@ const ProductAndCategoryList = ({ setCartCount }) => {
                 ))}
               </div>
             </div>
-          
+          )}
         </div>
       </div>
 
@@ -141,7 +147,13 @@ const ProductAndCategoryList = ({ setCartCount }) => {
             Suggested Products
           </h1>
 
-         
+          {loadingProducts ? (
+            <div className="flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600"></div>
+            </div>
+          ) : errorProducts ? (
+            <div className="text-red-500 text-center">{errorProducts}</div>
+          ) : (
             <>
               {/* Desktop: Horizontal scroll */}
               <div className="hidden md:block overflow-x-auto pb-4">
@@ -296,7 +308,7 @@ const ProductAndCategoryList = ({ setCartCount }) => {
               </div>
             </>
 
-          
+          )}
         </div>
       </section>
 
