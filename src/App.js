@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './Layout/layout';
 import axios from 'axios';
+import Search  from './Components/View-Products/Search';
 
 import { BASE_URL } from './Components/Urls/Urls';
 
@@ -16,7 +17,6 @@ const PlaceOrder = React.lazy(() => import('./Components/Orders/PlaceOrders'));
 const OrderSuccess = React.lazy(() => import('./Components/Orders/Order-Success'));
 const OrderPage = React.lazy(() => import('./Components/Orders/Ordered-products'));
 const Wishlist = React.lazy(() => import('./Components/Wishlist/Wishlist'));
-const Search = React.lazy(() => import('./Components/View-Products/Search'));
 const ReturnOrder = React.lazy(() => import('./Components/Orders/ReturnOrder'));
 const ProfilePage = React.lazy(() => import('./Components/Profile/Profile'));
 const Category = React.lazy(() => import('./Components/Category/Category'));
