@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Import Link for routing
-import { CircleUserRound, Moon, Sun } from 'lucide-react'; // Import Moon and Sun icons from lucide-react
+import { CircleUserRound, House, Moon, Package2, ShoppingCart, Sun } from 'lucide-react'; // Import Moon and Sun icons from lucide-react
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'; // Import dropdown components
 import { ChevronDownIcon } from '@heroicons/react/20/solid'; // Import Chevron icon
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'; // Updated import for dots vertical icon
@@ -193,30 +193,34 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
         <ul className="flex justify-around items-center">
           <li>
             <Link className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${darkMode ? 'text-white' : 'text-gray-700'}`} to="/">
-              <i className="fas fa-house mb-1"></i>
+            <House color={darkMode ? "#ffffff" : "#0d0d0d"} strokeWidth={2} />
               Home
             </Link>
           </li>
           <li>
             <Link className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${darkMode ? 'text-white' : 'text-gray-700'}`} to="/cart">
-              <i className="fas fa-shopping-cart mb-1 relative">
-                <span className="bg-blue-600 text-white rounded-full px-2 text-xs absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
-                  {cartCount}
-                </span>
 
-              </i>
+              <div className="cart-icon-container">
+                <ShoppingCart color={darkMode ? "#ffffff" : "#0d0d0d"} />
+                {cartCount > 0 && (
+                  <span className="cart-count-badge">
+                    {cartCount}
+                  </span>
+
+                )}
+              </div>
               Cart
             </Link>
           </li>
           <li>
             <Link className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${darkMode ? 'text-white' : 'text-gray-700'}`} to="/orders">
-              <i className="fas fa-box mb-1"></i>
+              <Package2 color={darkMode ? "#ffffff" : "#0d0d0d"} />
               Orders
             </Link>
           </li>
           <li>
             <Link className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${darkMode ? 'text-white' : 'text-gray-700'}`} to="/profile">
-              <CircleUserRound />
+              <CircleUserRound color={darkMode ? "#ffffff" : "#0d0d0d"} />
               Profile
             </Link>
           </li>
