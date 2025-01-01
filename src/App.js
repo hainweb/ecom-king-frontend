@@ -2,12 +2,12 @@ import React, { useEffect, useState, useMemo, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './Layout/layout';
 import axios from 'axios';
-import Search  from './Components/View-Products/Search';
 
 import { BASE_URL } from './Components/Urls/Urls';
-
+import Search  from './Components/View-Products/Search'; 
 // Lazy load components
 const ProductList = React.lazy(() => import('./Components/View-Products/View-products'));
+
 const Login = React.lazy(() => import('./Components/Login/Login'));
 const Signup = React.lazy(() => import('./Components/Signup/Signup'));
 const Logout = React.lazy(() => import('./Components/Login/Logout'));
@@ -72,7 +72,7 @@ function App() {
 
 
   return (
-    <div className={`container ${darkMode ? 'dark' : 'light'}`}>
+    <div className={`${darkMode ? 'dark' : 'light'}`}>
       <Router>
         <Layout user={user} cartCount={cartCount} darkMode={darkMode} setDarkMode={setDarkMode} />
         <Suspense fallback={<div>Loading...</div>}>
