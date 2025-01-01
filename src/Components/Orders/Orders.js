@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Package, Truck, Home, ChevronRight, Loader2 } from 'lucide-react';
+import { Package, Truck, Home, ChevronRight, Loader2, Clock } from 'lucide-react';
 import axios from 'axios';
 import { BASE_URL } from '../Urls/Urls';
 import { Link } from 'react-router-dom';
@@ -13,8 +13,8 @@ const OrderList = () => {
       axios
         .get(`${BASE_URL}/view-orders`, { withCredentials: true })
         .then((response) => {
-          console.log('res orderlist',response); 
-          
+          console.log('res orderlist', response);
+
           setOrders(response.data.orders);
           setLoading(false);
         });
@@ -24,10 +24,13 @@ const OrderList = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Delivered':
+      case 'Product delivered':
         return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
       case 'Shipped':
         return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
+        case 'cancel':
+        return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+        
       default:
         return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
     }
@@ -59,6 +62,7 @@ const OrderList = () => {
                   key={order._id}
                   className="border-b border-gray-200 last:border-0 dark:border-gray-700"
                 >
+                  <Link to={`/view-orders-products/${order._id}`} className="btn btn-primary btn-sm">
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-6">
                       <div>
@@ -71,40 +75,108 @@ const OrderList = () => {
 
                       </div>
                       <div>
+
                         <span
-                          className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
-                            order.status
-                          )}`}
+                          className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${order.status3
+                              ? getStatusColor(order.status3)
+                              : getStatusColor(order.status)
+                            }`}
                         >
-                          {order.status}
+                          {order.status3 || order.status2|| order.status}
                         </span>
+
+                        {order.cancel && (
+                          <span
+                            className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
+                              "cancel"
+                            )}`}
+                          >
+                            Canceled
+                          </span>
+                        )}
+
+
                       </div>
                     </div>
 
                     <div className="relative">
-                      <div className="absolute left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 top-1/2 transform -translate-y-1/2" />
-                      <div className="relative flex justify-between">
-                        <div className="flex flex-col items-center text-blue-600 dark:text-blue-300">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center bg-blue-600 dark:bg-blue-800">
-                            <Package className="w-4 h-4 text-white" />
+                      <div className="flex justify-between items-center">
+                        {/* Connecting Lines Container */}
+                        <div className="absolute top-6 left-[15%] right-[15%] h-0.5 z-0">
+                          <div className="h-full relative overflow-hidden bg-gray-200 dark:bg-gray-700">
+                            <div
+                              className={`
+                      absolute top-0 left-0 h-full bg-green-500
+                      transition-all duration-1000 ease-in-out
+                      ${order.status ? 'w-1/2' : 'w-0'}
+                      ${order.status2 ? 'w-full' : ''}
+                    `}
+                            />
                           </div>
-                          <p className="mt-2 text-sm font-medium">Ordered</p>
                         </div>
 
-                        <div className="flex flex-col items-center text-blue-600 dark:text-blue-300">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center bg-blue-600 dark:bg-blue-800">
-                            <Truck className="w-4 h-4 text-white" />
+                        {/* Order Placed */}
+                        <div className="flex-1 relative z-10">
+                          <div className="flex justify-center">
+                            <div className={`
+                    w-12 h-12 rounded-full flex items-center justify-center
+                    transition-all duration-500 transform
+                    ${order.status
+                                ? 'bg-green-500 dark:bg-green-400 scale-110 animate-pulse'
+                                : 'bg-gray-300 dark:bg-gray-600'}
+                  `}>
+                              <Clock className={`
+                      w-6 h-6 transition-all duration-500
+                      ${order.status
+                                  ? 'text-white animate-spin-slow'
+                                  : 'text-gray-600 dark:text-gray-400'}
+                    `} />
+                            </div>
                           </div>
-                          <p className="mt-2 text-sm font-medium">Shipped</p>
                         </div>
 
-                        <div className="flex flex-col items-center text-blue-600 dark:text-blue-300">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center bg-blue-600 dark:bg-blue-800">
-                            <Home className="w-4 h-4 text-white" />
+                        {/* Shipped */}
+                        <div className="flex-1 relative z-10">
+                          <div className="flex justify-center">
+                            <div className={`
+                    w-12 h-12 rounded-full flex items-center justify-center
+                    transition-all duration-500 transform
+                    ${order.status2
+                                ? 'bg-green-500 dark:bg-green-400 scale-110 animate-pulse'
+                                : 'bg-gray-300 dark:bg-gray-600'}
+                  `}>
+                              <Truck className={`
+                      w-6 h-6 transition-all duration-500
+                      ${order.status2
+                                  ? 'text-white animate-truck'
+                                  : 'text-gray-600 dark:text-gray-400'}
+                    `} />
+                            </div>
                           </div>
-                          <p className="mt-2 text-sm font-medium">Delivered</p>
+                        </div>
+
+                        {/* Delivered */}
+                        <div className="flex-1 relative z-10">
+                          <div className="flex justify-center">
+                            <div className={`
+                    w-12 h-12 rounded-full flex items-center justify-center
+                    transition-all duration-500 transform
+                    ${order.status3
+                                ? 'bg-green-500 dark:bg-green-400 scale-110 animate-pulse'
+                                : 'bg-gray-300 dark:bg-gray-600'}
+                  `}>
+                              <Package className={`
+                      w-6 h-6 transition-all duration-500
+                      ${order.status3
+                                  ? 'text-white animate-bounce'
+                                  : 'text-gray-600 dark:text-gray-400'}
+                    `} />
+                            </div>
+                          </div>
                         </div>
                       </div>
+
+
                     </div>
 
                     <div className="mt-6 flex items-center justify-between">
@@ -120,6 +192,8 @@ const OrderList = () => {
                       </button>
                     </div>
                   </div>
+                  </Link>
+
                 </div>
               ))}
             </div>
