@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
-// Correct import of confetti
 import confetti from 'canvas-confetti';
 import { Link } from 'react-router-dom';
 
 const OrderConfirmation = () => {
-
   useEffect(() => {
-    // Function to create dots animation
     function createDots() {
       const container = document.querySelector('.icon-container');
       for (let i = 0; i < 20; i++) {
@@ -17,7 +14,6 @@ const OrderConfirmation = () => {
       }
     }
 
-    // Function to animate individual dots
     function animateDot(dot) {
       const angle = Math.random() * Math.PI * 2;
       const radius = 40 + Math.random() * 40;
@@ -45,7 +41,6 @@ const OrderConfirmation = () => {
 
     createDots();
 
-    // Start and stop confetti animation
     const startConfetti = () => {
       setTimeout(() => {
         confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
@@ -54,32 +49,58 @@ const OrderConfirmation = () => {
 
     const stopConfetti = () => {
       setTimeout(() => {
-        confetti.reset(); // This will clear the confetti
+        confetti.reset();
       }, 5000);
     };
 
     startConfetti();
     stopConfetti();
-    
   }, []);
 
   return (
-    <div className="main-main con">
-      <div className="card">
-        <div className="icon-container">
-          <div className="circle">
-            <span className="checkmark">✓</span>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-4">
+      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 transform transition-all duration-500 hover:scale-105">
+        <div className="relative h-32 mb-8" style={{ perspective: '1000px' }}>
+          <div className="icon-container absolute inset-0 flex items-center justify-center">
+            <div className="relative w-20 h-20">
+              <div className="circle absolute inset-0 bg-green-500 rounded-full animate-pulse"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="checkmark text-3xl text-white transform scale-150">✓</span>
+              </div>
+            </div>
           </div>
+          <style jsx>{`
+            .dot {
+              position: absolute;
+              width: 4px;
+              height: 4px;
+              background: #22c55e;
+              border-radius: 50%;
+              opacity: 0;
+            }
+          `}</style>
         </div>
-        <h2>Thank you for ordering!</h2>
-        <p>Thank you for choosing Our Services. We appreciate your business and look forward to serving you again!</p>
-        <div className="buttons">
-         <Link to={'/orders'}>
-            <button className="view-order">VIEW ORDER</button>
+
+        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">
+          Thank you for ordering!
+        </h2>
+        
+        <p className="text-center text-gray-600 dark:text-gray-300 mb-8">
+          Thank you for choosing Our Services. We appreciate your business and look forward to serving you again!
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link to="/orders" className="flex-1">
+            <button className="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
+              VIEW ORDER
+            </button>
           </Link>
-         <Link to={'/'}>
-            <button className="continue-shopping">CONTINUE SHOPPING</button>
-         </Link>
+          
+          <Link to="/" className="flex-1">
+            <button className="w-full px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-white font-semibold rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
+              CONTINUE SHOPPING
+            </button>
+          </Link>
         </div>
       </div>
     </div>
