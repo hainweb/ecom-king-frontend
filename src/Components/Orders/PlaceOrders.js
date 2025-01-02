@@ -85,11 +85,12 @@ const PlaceOrderForm = ({ user, setSuccess,setCartCount }) => {
       );
       
       if (response.data.status) {
-        setTimeout(() => {
+      if(!proId){
           setCartCount(0)
+      }
           alert("Ordered successfully");
           navigate("/order-success");
-        }, 6000);
+       
       } else {
         navigate("/cart", {
           state: { info: response.data.message, proId: response.data.product },
