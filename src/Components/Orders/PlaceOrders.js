@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { BASE_URL } from "../Urls/Urls";
 import { AlertCircle } from "lucide-react";
 
-const PlaceOrderForm = ({ user, success,setCartCount }) => {
+const PlaceOrderForm = ({ user, setSuccess,setCartCount }) => {
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [availabilityMessage, setAvailabilityMessage] = useState("");
   const [total, setTotal] = useState(0);
@@ -68,7 +68,7 @@ const PlaceOrderForm = ({ user, success,setCartCount }) => {
       return;
     }
 
-    success(true);
+    setSuccess(true);
 
     try {
      
