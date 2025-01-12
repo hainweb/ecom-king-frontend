@@ -9,10 +9,6 @@ const Slider = lazy(() => import('./Slider'));
 const BestOfElectronic = lazy(() => import('./BestOfElectronic'));
 const ExploreMore = lazy(() => import('./ExploreMore'));
 const Footer = lazy(() => import('../Footer/Footer'));
-import { Slider } from './Slider'
-import BestOfElectronic from './BestOfElectronic';
-import ExploreMore from './ExploreMore';
-import Footer from '../Footer/Footer';
 
 const ProductAndCategoryList = ({ setCartCount }) => {
   const [products, setProducts] = useState([]);
