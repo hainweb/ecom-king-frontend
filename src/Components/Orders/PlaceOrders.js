@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { BASE_URL } from "../Urls/Urls";
 import { AlertCircle } from "lucide-react";
 
-const PlaceOrderForm = ({ user, success,setCartCount }) => {
+const PlaceOrderForm = ({ user, setSuccess,setCartCount }) => {
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [availabilityMessage, setAvailabilityMessage] = useState("");
   const [total, setTotal] = useState(0);
@@ -68,7 +68,7 @@ const PlaceOrderForm = ({ user, success,setCartCount }) => {
       return;
     }
 
-    success(true);
+    setSuccess(true);
 
     try {
      
@@ -85,11 +85,11 @@ const PlaceOrderForm = ({ user, success,setCartCount }) => {
       );
       
       if (response.data.status) {
-        setTimeout(() => {
+       
           setCartCount(0)
           alert("Ordered successfully");
           navigate("/order-success");
-        }, 6000);
+       
       } else {
         navigate("/cart", {
           state: { info: response.data.message, proId: response.data.product },

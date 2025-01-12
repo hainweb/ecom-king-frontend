@@ -121,32 +121,36 @@ const ProductDisplay = ({ setCartCount }) => {
         if (response.data.status) {
           setCartCount((prevCount) => prevCount + 1);
         }
+        setNotificationMessage(response.data.message);
+        setShowNotification(true);
+        setTimeout(() => setShowNotification(false), 3000);
       })
       .catch((error) => {
         console.error('Error:', error);
       })
-      .finally(() => {
-        setNotificationMessage("Product added to cart successfully!");
-        setShowNotification(true);
-        setTimeout(() => setShowNotification(false), 3000);
-      });
-
-
   };
 
   const addToWishlist = () => {
+    // Toggle the current state
+    const newWishlistedState = !isWishlisted;
+    setIsWishlisted(newWishlistedState);
 
+    // Send the request to the server
     axios
       .get(`${BASE_URL}/add-to-Wishlist/${product._id}`, { withCredentials: true })
       .then((response) => {
         console.log('res wish', response);
-
-        if (response.data.status) {
-          setIsWishlisted(true)
+        if (!response.data.status) {
+          // Revert the state if the server response is unsuccessful
+          setIsWishlisted(!newWishlistedState);
         }
-
+      })
+      .catch(() => {
+        // Handle any errors by reverting the state
+        setIsWishlisted(!newWishlistedState);
       });
-  }
+  };
+
 
   const handleBuyNow = (proId) => {
 
@@ -287,15 +291,19 @@ const ProductDisplay = ({ setCartCount }) => {
               </div>
 
               <div className="flex gap-4">
+
                 <button
-                  onClick={() => addToWishlist()}
-                  className={`p-2 rounded-full border ${isWishlisted
-                    ? "text-red-500 border-red-500"
-                    : "text-gray-500 border-gray-300 dark:border-gray-600"
+                  onClick={addToWishlist}
+                  className={`p-3 rounded-full border ${isWishlisted ? "text-red-500 border-red-500" : "text-gray-500 border-gray-300 dark:border-gray-600"
                     } hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}
                 >
-                  <Heart className={`w-6 h-6 ${isWishlisted ? "fill-current" : ""}`} />
+                  <Heart
+                    className={`w-5 h-5 transition-all duration-300 ease-in-out ${isWishlisted ? "fill-current scale-125" : "scale-100"
+                      }`}
+                  />
                 </button>
+
+
                 <button className="p-2 rounded-full border border-gray-300 dark:border-gray-600 text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                   <Share2 className="w-6 h-6" />
                 </button>
@@ -343,8 +351,8 @@ const ProductDisplay = ({ setCartCount }) => {
               <button
                 onClick={() => handleBuyNow(product._id)}
                 className={`h-12 text-white text-lg font-semibold rounded-lg shadow-lg transition-all flex items-center justify-center gap-2 ${product.Quantity === 0
-                    ? "bg-red-600 hover:bg-red-700"
-                    : "bg-blue-600 hover:bg-blue-700"
+                  ? "bg-red-600 hover:bg-red-700"
+                  : "bg-blue-600 hover:bg-blue-700"
                   }`}
                 disabled={product.Quantity === 0} // Disable if stock is out
               >
@@ -361,7 +369,7 @@ const ProductDisplay = ({ setCartCount }) => {
             {/* Stock Quantity Indicator */}
             {product.Quantity < 5 && product.Quantity > 0 && (
               <p className="text-sm text-red-600 dark:text-red-400">
-                 <ClockAlert className="w-6 h-6" />
+                <ClockAlert className="w-6 h-6" />
                 Only {product.Quantity} left !
               </p>
             )}

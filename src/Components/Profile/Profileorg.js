@@ -76,7 +76,7 @@ const ProfilePage = ({ user }) => {
     // Address Handlers
     const handleAddressChange = (e) => {
         const { name, value } = e.target;
-        setAddressData(prev => ({ ...prev, [name]: value }));
+        setProfileData(prev => ({ ...prev, [name]: value }));
         if (errors[name]) {
             setErrors(prev => ({ ...prev, [name]: "" }));
         }

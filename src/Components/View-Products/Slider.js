@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../Urls/Urls";
 import { Link } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export function Slider() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -62,7 +63,7 @@ export function Slider() {
                   <img
                     src={slide.image}
                     alt={`Slide ${index + 1}`}
-                    className="w-full h-64 object-cover"
+                    className="w-full h-24 sm:h-64 object-cover"
                   />
                 </Link>
               </div>
@@ -81,27 +82,31 @@ export function Slider() {
             ))}
         </div>
 
+        {/* Previous Button */}
         <button
           onClick={() =>
             setActiveIndex((prevIndex) =>
               prevIndex === 0 ? slides.length - 1 : prevIndex - 1
             )
           }
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 p-1 sm:p-3 lg:p-4 rounded-full text-white shadow-lg bg-gradient-to-r from-black/30 to-gray-700/30 bg-blend-overlay backdrop-blur-md hover:from-black/50 hover:to-gray-900/50 transition duration-300 ease-in-out"
           aria-label="Previous slide"
         >
-          &#8592;
+         <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5"/>
         </button>
 
+        {/* Next Button */}
         <button
           onClick={() =>
             setActiveIndex((prevIndex) => (prevIndex + 1) % slides.length)
           }
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 p-1 sm:p-3 lg:p-4 rounded-full text-white shadow-lg bg-gradient-to-r from-black/30 to-gray-700/30 bg-blend-overlay backdrop-blur-md hover:from-black/50 hover:to-gray-900/50 transition duration-300 ease-in-out"
           aria-label="Next slide"
         >
-          &#8594;
+         <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5"/>
         </button>
+
+
       </div>
 
 

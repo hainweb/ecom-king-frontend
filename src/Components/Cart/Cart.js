@@ -229,7 +229,7 @@ const Cart = ({ products = [], user, setCartCount }) => {
                           {DecProductId === item.product._id ? (
                             <Loader2 className="w-4 h-4 animate-spin" />
                           ) : (
-                            <Minus className="w-4 h-4" />
+                            <Minus className="w-4 h-4 dark:text-white " />
                           )}
                         </button>
 
@@ -256,7 +256,7 @@ const Cart = ({ products = [], user, setCartCount }) => {
                           {AddingProductId === item.product._id ? (
                             <Loader2 className="w-4 h-4 animate-spin" />
                           ) : (
-                            <Plus className="w-4 h-4" />
+                            <Plus className="w-4 h-4 dark:text-white" />
                           )}
                         </button>
                       </div>
