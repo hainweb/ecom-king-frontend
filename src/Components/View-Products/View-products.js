@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BASE_URL, IMG_URL } from '../Urls/Urls';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 import { lazy, Suspense } from 'react';
 import { Heart, ShoppingCart } from 'lucide-react';
 
@@ -10,12 +9,10 @@ const Slider = lazy(() => import('./Slider'));
 const BestOfElectronic = lazy(() => import('./BestOfElectronic'));
 const ExploreMore = lazy(() => import('./ExploreMore'));
 const Footer = lazy(() => import('../Footer/Footer'));
-=======
 import { Slider } from './Slider'
 import BestOfElectronic from './BestOfElectronic';
 import ExploreMore from './ExploreMore';
 import Footer from '../Footer/Footer';
->>>>>>> c867bd89ed481bb171a749008147f0189d05e4d8
 
 const ProductAndCategoryList = ({ setCartCount }) => {
   const [products, setProducts] = useState([]);
@@ -46,17 +43,14 @@ const ProductAndCategoryList = ({ setCartCount }) => {
     fetchCategories();
   }, []);
 
-<<<<<<< HEAD
   const toggleWishlist = useCallback(
     async (event, productId) => {
       event.preventDefault();
       setWishlistLoadingId(productId); // Optional: show loading for specific product
 
-=======
   // Fetch Products
   useEffect(() => {
     const fetchProducts = async () => {
->>>>>>> c867bd89ed481bb171a749008147f0189d05e4d8
       try {
         const response = await axios.get(`${BASE_URL}/products`, { withCredentials: true });
         let data = response.data.products;
@@ -95,7 +89,6 @@ const ProductAndCategoryList = ({ setCartCount }) => {
             )
           );
         }
-<<<<<<< HEAD
       } catch (err) {
         console.error('Error updating wishlist:', err);
       } finally {
@@ -114,7 +107,6 @@ const ProductAndCategoryList = ({ setCartCount }) => {
       setAlreadycartproduct(productId);
       try {
         const response = await axios.get(`${BASE_URL}/add-to-cart/${productId}`, { withCredentials: true });
-=======
         setWishlistLoadingId(null);
       });
   };
@@ -124,7 +116,6 @@ const ProductAndCategoryList = ({ setCartCount }) => {
     axios
       .get(`${BASE_URL}/add-to-cart/${productId}`, { withCredentials: true })
       .then((response) => {
->>>>>>> c867bd89ed481bb171a749008147f0189d05e4d8
         if (response.data.status) {
           setCartCount((prevCount) => prevCount + 1);
         } else {
@@ -154,7 +145,6 @@ const ProductAndCategoryList = ({ setCartCount }) => {
       <div className="category-list py-8 bg-gray-100 dark:bg-gray-800">
 
         <div className="container mx-auto px-4">
-<<<<<<< HEAD
 
           <div className="overflow-x-auto scrollbar-hidden">
             <div className="flex space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10 min-w-max">
@@ -175,7 +165,6 @@ const ProductAndCategoryList = ({ setCartCount }) => {
             </div>
           </div>
 
-=======
           {loadingCategories ? (
             <div className="flex justify-center items-center py-12">
               <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600"></div>
@@ -202,7 +191,6 @@ const ProductAndCategoryList = ({ setCartCount }) => {
               </div>
             </div>
           )}
->>>>>>> c867bd89ed481bb171a749008147f0189d05e4d8
         </div>
       </div>
 
@@ -214,8 +202,6 @@ const ProductAndCategoryList = ({ setCartCount }) => {
             Suggested Products
           </h1>
 
-<<<<<<< HEAD
-=======
           {loadingProducts ? (
             <div className="flex justify-center items-center py-12">
               <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600"></div>
@@ -299,8 +285,6 @@ const ProductAndCategoryList = ({ setCartCount }) => {
                   ))}
                 </div>
               </div>
->>>>>>> c867bd89ed481bb171a749008147f0189d05e4d8
-
           <>
             {/* Desktop: Horizontal scroll */}
             <div className="hidden md:block overflow-x-auto pb-4">
@@ -481,10 +465,7 @@ const ProductAndCategoryList = ({ setCartCount }) => {
           </>
 
 
-<<<<<<< HEAD
-=======
           )}
->>>>>>> c867bd89ed481bb171a749008147f0189d05e4d8
         </div>
       </section>
 
