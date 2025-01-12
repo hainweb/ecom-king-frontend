@@ -277,24 +277,24 @@ const ProductCard = ({ products, orderTrack, setOrderTrack }) => {
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6">Products</h1>
               
                 {/* Products Grid */}
-<<<<<<< HEAD
+
             <div className="grid grid-cols-1 mb-12 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
                 <div key={product._id} className="bg-white  rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-=======
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
                 <div key={product._id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
->>>>>>> c867bd89ed481bb171a749008147f0189d05e4d8
+
                   <div className="relative">
                     <img
                       src={product.product?.thumbnailImage || '/api/placeholder/400/300'}
                       alt={product.product?.Name}
-<<<<<<< HEAD
+
                       className="w-full h-full object-cover"
-=======
+
                       className="w-full h-48 object-cover"
->>>>>>> c867bd89ed481bb171a749008147f0189d05e4d8
+
                     />
                     {product.return?.status && (
                       <div className="absolute inset-0 bg-yellow-500 bg-opacity-90 flex items-center justify-center">
