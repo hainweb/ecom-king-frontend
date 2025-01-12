@@ -85,8 +85,13 @@ const PlaceOrderForm = ({ user, setSuccess,setCartCount }) => {
       );
       
       if (response.data.status) {
+<<<<<<< HEAD
        
+=======
+      if(!proId){
+>>>>>>> c867bd89ed481bb171a749008147f0189d05e4d8
           setCartCount(0)
+      }
           alert("Ordered successfully");
           navigate("/order-success");
        
