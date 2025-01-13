@@ -184,14 +184,14 @@ const ProductCard = ({ products, orderTrack }) => {
         <div className="w-full h-full bg-gradient-to-l from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 py-8 px-6">
             <div className="container mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6">
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6">Products</h1>
-                <div className="grid grid-cols-1 mb-12 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 mb-16 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {products.map((product) => (
                         <div key={product._id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                             <div className="relative">
                                 <img
                                     src={product.product?.thumbnailImage || '/api/placeholder/400/300'}
                                     alt={product.product?.Name}
-                                    className="w-full h-48 object-cover"
+                                    className="w-full h-full object-cover"
                                 />
                                 {product.return?.status && (
                                     <div className="absolute inset-0 bg-yellow-500 bg-opacity-90 flex items-center justify-center">
@@ -242,17 +242,17 @@ const OrderPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resOrder = await axios.get(`${BASE_URL}/order-details/${Id}`, { withCredentials: true });
-                const resProducts = await axios.get(`${BASE_URL}/products`, { withCredentials: true });
+                const response = await axios.get(`${BASE_URL}/view-orders-products/${Id}`, {
+                    withCredentials: true,
+                });
+                console.log('view ordered pro',response.data.products);
 
-                if (resOrder.data.status) {
-                    setOrderTrack(resOrder.data.orderTrack);
-                }
-                if (resProducts.data.status) {
-                    setProducts(resProducts.data.products);
-                }
+                setProducts(response.data.products);
+                setOrderTrack(response.data.ordertrack);
+              
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching order details:', error);
+               
             }
         };
 
