@@ -238,10 +238,12 @@ const OrderPage = () => {
     const [orderTrack, setOrderTrack] = useState([]);
     const [products, setProducts] = useState([]);
     const { Id } = useParams();
+    const [laoding,setLoading]=useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true)
                 const response = await axios.get(`${BASE_URL}/view-orders-products/${Id}`, {
                     withCredentials: true,
                 });
@@ -249,7 +251,7 @@ const OrderPage = () => {
 
                 setProducts(response.data.products);
                 setOrderTrack(response.data.ordertrack);
-              
+              setLoading(false)
             } catch (error) {
                 console.error('Error fetching order details:', error);
                
@@ -258,6 +260,20 @@ const OrderPage = () => {
 
         fetchData();
     }, [Id]);
+
+    if (loading) {
+        return (
+          <div className="row">
+            <div className="container" style={{ textAlign: 'center' }}>
+              <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+              </div>
+              <p>Loading, please wait...</p>
+            </div>
+          </div>
+    
+        );
+      }
 
     return (
         <>
