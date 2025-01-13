@@ -89,7 +89,7 @@ function App() {
             <Route path="/return" element={<ProtectedRoute component={ReturnOrder} />} />
             <Route path="/profile" element={user? <ProfilePage user={user}/> : <Login setUser={setUser} setCartCount={setCartCount} /> } />
             <Route path="/search" element={<Search user={user} darkMode={darkMode} cartCount={cartCount} setDarkMode={setDarkMode} />} />
-              <Route path="/product/:id" element={<ProductDisplay setCartCount={setCartCount}/>} />
+            <Route path="/product/:id" element={user? <ProductDisplay setCartCount={setCartCount} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
               <Route path="/slider" element={<Slider />} />
               <Route path="/help-center" element={<ProtectedRoute component={HelpCenter} />} />
             </Routes>
