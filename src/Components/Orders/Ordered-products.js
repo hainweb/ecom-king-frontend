@@ -238,7 +238,7 @@ const OrderPage = () => {
     const [orderTrack, setOrderTrack] = useState([]);
     const [products, setProducts] = useState([]);
     const { Id } = useParams();
-    const [laoding,setLoading]=useState(true)
+    const [loading,setLoading]=useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
