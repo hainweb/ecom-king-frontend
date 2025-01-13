@@ -58,10 +58,8 @@ function App() {
     return (
       <div className="row">
         <div className="container" style={{ textAlign: 'center' }}>
-          <div className="loading-spinner">
-            <div className="spinner-segment"></div>
-            <div className="spinner-segment"></div>
-            <div className="spinner-segment"></div>
+          <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           </div>
           <p>Loading, please wait...</p>
         </div>
