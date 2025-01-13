@@ -6,7 +6,7 @@ import axios from 'axios';
 import { BASE_URL } from './Components/Urls/Urls';
 import Search  from './Components/View-Products/Search'; 
 // Lazy load components
-const ProductList = React.lazy(() => import('./Components/View-Products/View-products'));
+import ProductList from './Components/View-Products/View-products';
 
 const Login = React.lazy(() => import('./Components/Login/Login'));
 const Signup = React.lazy(() => import('./Components/Signup/Signup'));
