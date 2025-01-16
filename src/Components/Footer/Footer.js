@@ -29,8 +29,8 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="text-sm">
-              <li><a href="#" className="hover:text-indigo-400">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-indigo-400">Terms of Service</a></li>
+              <li><Link to="/terms" className="hover:text-indigo-400">Privacy Policy</Link></li>
+              <li><Link to="/privacy" className="hover:text-indigo-400">Terms of Service</Link></li>
               <li><a href="#" className="hover:text-indigo-400">FAQs</a></li>
               <li><Link to="/help-center" className="hover:text-indigo-400">Contact Us</Link></li>
             </ul>
