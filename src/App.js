@@ -4,7 +4,7 @@ import Layout from './Layout/layout';
 import axios from 'axios';
 
 import { BASE_URL } from './Components/Urls/Urls';
-import Search  from './Components/View-Products/Search'; 
+import Search from './Components/View-Products/Search';
 // Lazy load components
 const ProductList = React.lazy(() => import('./Components/View-Products/View-products'));
 
@@ -22,7 +22,10 @@ const ProfilePage = React.lazy(() => import('./Components/Profile/Profile'));
 const Category = React.lazy(() => import('./Components/Category/Category'));
 const ProductDisplay = React.lazy(() => import('./Components/View-Products/Products'));
 const Slider = React.lazy(() => import('./Components/View-Products/Slider'));
+const ForgotPassword = React.lazy(()=> import('./Components/Login/ForgotPassword'));
 const HelpCenter = React.lazy(() => import('./Components/HelpCenter/HelpCenter'));
+const TermsOfService = React.lazy(() => import('./Components/TermsAndPrivasy/TermsOfServices'));
+const PrivacyPolicy = React.lazy(()=>import ('./Components/TermsAndPrivasy/PrivacyPolicy'))
 
 function App() {
   const [user, setUser] = useState(null);
@@ -51,19 +54,18 @@ function App() {
   }, [darkMode]);
 
   const ProtectedRoute = ({ component: Component }) => {
-    return user ? <Component setCartCount={setCartCount}/> : <Login setUser={setUser} setCartCount={setCartCount} />;
+    return user ? <Component setCartCount={setCartCount} /> : <Login setUser={setUser} setCartCount={setCartCount} />;
   };
 
   if (loading) {
     return (
       <div className="row">
         <div className="container" style={{ textAlign: 'center' }}>
-          <div className="loading-spinner">
-            <div className="spinner-segment"></div>
-            <div className="spinner-segment"></div>
-            <div className="spinner-segment"></div>
+          <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            <p>Loading, please wait...</p>
           </div>
-          <p>Loading, please wait...</p>
+          
         </div>
       </div>
 
@@ -83,22 +85,25 @@ function App() {
             <Route path="/logout" element={<Logout setUser={setUser} setCartCount={setCartCount} />} />
             <Route path="/cart" element={<Cart setCartCount={setCartCount} />} />
             <Route path="/orders" element={<ProtectedRoute component={OrderList} />} />
-            <Route path="/place-order" element={user? <PlaceOrder setCartCount={setCartCount} setSuccess={setSuccess}/> : <Login setUser={setUser} setCartCount={setCartCount} />} />
+            <Route path="/place-order" element={user ? <PlaceOrder setCartCount={setCartCount} setSuccess={setSuccess} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
             <Route path="/order-success" element={success ? <OrderSuccess /> : <ProductList setCartCount={setCartCount} />} />
             <Route path="/view-orders-products/:Id" element={<ProtectedRoute component={OrderPage} />} />
             <Route path="/wishlist" element={<ProtectedRoute component={Wishlist} />} />
             <Route path="/category/:thing" element={<Category />} />
             <Route path="/return" element={<ProtectedRoute component={ReturnOrder} />} />
-            <Route path="/profile" element={user? <ProfilePage user={user}/> : <Login setUser={setUser} setCartCount={setCartCount} /> } />
+            <Route path="/profile" element={user ? <ProfilePage user={user} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
             <Route path="/search" element={<Search user={user} darkMode={darkMode} cartCount={cartCount} setDarkMode={setDarkMode} />} />
-              <Route path="/product/:id" element={<ProductDisplay setCartCount={setCartCount}/>} />
-              <Route path="/slider" element={<Slider />} />
-              <Route path="/help-center" element={<ProtectedRoute component={HelpCenter} />} />
-            </Routes>
+            <Route path="/product/:id" element={user? <ProductDisplay setCartCount={setCartCount} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
+            <Route path="/slider" element={<Slider />} />
+            <Route path="/help-center" element={<ProtectedRoute component={HelpCenter} />} />
+            <Route path="/forgot-password" element={<ForgotPassword/>} /> 
+            <Route path="/terms" element={<TermsOfService/>} /> 
+            <Route path="/privacy" element={<PrivacyPolicy/>} />
+          </Routes>
         </Suspense>
       </Router>
-    </div>
+    </div> 
   );
 }
-
+ 
 export default App;

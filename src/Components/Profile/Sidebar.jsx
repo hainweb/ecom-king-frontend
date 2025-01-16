@@ -29,7 +29,8 @@ const Sidebar = ({ view, setView, isMobileNavOpen, setIsMobileNavOpen }) => {
                     King Cart
                 </Link>
                 <ul className="space-y-4 text-gray-700 dark:text-gray-300 mt-10 md:mt-0">
-    <li className="font-bold hover:text-blue-600 dark:hover:text-blue-400">MY ORDERS</li>
+                    <Link to="/orders">
+    <li className="font-bold hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">MY ORDERS</li></Link>
     <li className="font-bold hover:text-blue-600 dark:hover:text-blue-400">ACCOUNT SETTINGS</li>
 
     <ul className="pl-4 space-y-2 text-sm">
@@ -52,7 +53,11 @@ const Sidebar = ({ view, setView, isMobileNavOpen, setIsMobileNavOpen }) => {
         >
             Manage Addresses
         </li>
-        <li className="hover:text-blue-600 dark:hover:text-blue-400">Password & Security</li>
+        <li className={`cursor-pointer ${view === "PasswordAndSecurity" ? "text-blue-600 dark:text-blue-400 font-semibold" : "hover:text-blue-600 dark:hover:text-blue-400"}`}
+            onClick={() => {
+                setView("PasswordAndSecurity");
+                setIsMobileNavOpen(false);
+            }}>Password & Security</li>
     </ul>
 
     <li className="font-bold hover:text-blue-600 dark:hover:text-blue-400">PAYMENTS</li>

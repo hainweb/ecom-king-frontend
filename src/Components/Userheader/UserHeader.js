@@ -200,13 +200,14 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
               Home
             </Link>
           </li>
+
           <li>
             <Link className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${darkMode ? 'text-white' : 'text-gray-700'}`} to="/cart">
 
               <div className="cart-icon-container">
                 <ShoppingCart color={darkMode ? "#ffffff" : "#0d0d0d"} />
                 {cartCount > 0 && (
-                  <span className="cart-count-badge">
+                  <span className="cart-count-badge ">
                     {cartCount}
                   </span>
 
@@ -215,6 +216,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
               Cart
             </Link>
           </li>
+          
           <li>
             <Link className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${darkMode ? 'text-white' : 'text-gray-700'}`} to="/orders">
               <Package2 color={darkMode ? "#ffffff" : "#0d0d0d"} />

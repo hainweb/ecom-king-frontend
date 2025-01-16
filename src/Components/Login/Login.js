@@ -6,6 +6,7 @@ import { User, Lock } from 'lucide-react';
 
 const Login = ({ setUser, setCartCount }) => {
   const [loading, setLoading] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(null)
   const [formData, setFormData] = useState({
     Mobile: '',
     Password: '',
@@ -24,6 +25,24 @@ const Login = ({ setUser, setCartCount }) => {
 
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+
+  useEffect(() => {
+    // If there's a lockout time, start the countdown
+    if (timeLeft !== null && timeLeft > 0) {
+      const timer = setInterval(() => {
+        setTimeLeft(prevTime => {
+          if (prevTime <= 1) {
+            clearInterval(timer); // Stop the timer when it reaches 0
+            return 0;
+          }
+          return prevTime - 1; // Decrease the time by 1 second
+        });
+      }, 1000);
+
+      return () => clearInterval(timer); // Clean up the interval on component unmount or if timeLeft changes
+    }
+  }, [timeLeft]);
 
   const handleChange = (e) => {
     setFormData({
@@ -49,7 +68,11 @@ const Login = ({ setUser, setCartCount }) => {
 
           navigate('/');
         } else {
-          setLoginErr(response.data.message || 'Invalid mobile or password');
+          if (response.data.timeLeft) {
+            setTimeLeft(response.data.timeLeft)
+          } else {
+            setLoginErr(response.data.message || 'Invalid mobile or password');
+          }
         }
         setLoading(false);
       })
@@ -122,10 +145,16 @@ const Login = ({ setUser, setCartCount }) => {
             />
           </div>
 
-          {loginErr && <p className="text-red-500 text-sm">{loginErr}</p>}
+          {loginErr && !timeLeft &&<p className="text-red-500 text-sm">{loginErr}</p>}
+          {timeLeft !== null && timeLeft > 0 && (
+        <p className="text-red-500 text-sm">Too many failed attempts. Please try again in {timeLeft} seconds.</p>
+      )}
 
           <Link to="/signup" className="block text-center text-blue-500 text-sm hover:underline">
             Don't have an account? Sign up
+          </Link>
+          <Link to="/forgot-password" className="block text-center text-blue-500 text-sm hover:underline">
+           Forgot Password?
           </Link>
 
           <button

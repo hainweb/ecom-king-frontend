@@ -10,7 +10,8 @@ import {
   AlertCircle,
   Package,
   ArrowRight,
-  Loader2
+  Loader2,
+  Trash
 } from 'lucide-react';
 
 const Cart = ({ products = [], user, setCartCount }) => {
@@ -131,7 +132,7 @@ const Cart = ({ products = [], user, setCartCount }) => {
   const handlePlaceorder = () => {
     outofstock ? setOutofstockInfo('Some items are OUT OF STOCK') : navigate('/place-order');
   };
-  
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
@@ -174,9 +175,8 @@ const Cart = ({ products = [], user, setCartCount }) => {
                 {cartProducts.map(item => (
                   <div
                     key={item.product._id}
-                    className={`p-6 ${
-                      item.product.Quantity < 1 ? 'bg-red-50 dark:bg-red-900/20' : ''
-                    }`}
+                    className={`p-6 ${item.product.Quantity < 1 ? 'bg-red-50 dark:bg-red-900/20' : ''
+                      }`}
                   >
                     <div className="flex items-center space-x-4">
                       <Link to={`/product/${item.product._id}`} className="flex-shrink-0">
@@ -186,14 +186,14 @@ const Cart = ({ products = [], user, setCartCount }) => {
                           className="w-24 h-24 rounded-lg object-cover"
                         />
                       </Link>
-                      
+
                       <div className="flex-1 min-w-0">
                         <Link to={`/product/${item.product._id}`}>
                           <h3 className="text-lg font-medium text-gray-900 dark:text-white truncate">
                             {item.product.Name}
                           </h3>
                         </Link>
-                        
+
                         <div className="mt-1 flex items-center space-x-2">
                           <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                             ₹{(item.product.Price * item.quantity).toLocaleString()}
@@ -220,18 +220,21 @@ const Cart = ({ products = [], user, setCartCount }) => {
                         ) : null}
                       </div>
 
-                      <div className="flex items-center space-x-3">
+                      <div className="flex items-center mb-4 sm:mb-0 md:mb-0 space-x-3">
                         <button
                           onClick={() => decCartQuantity(item._id, item.product._id, user, -1)}
                           disabled={DecProductId === item.product._id}
                           className="p-2 rounded-full border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                         >
                           {DecProductId === item.product._id ? (
-                            <Loader2 className="w-4 h-4 animate-spin" />
+                            <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                          ) : item.quantity <= 1 ? (
+                            <Trash className="w-4 h-4 text-red-500 " />
                           ) : (
                             <Minus className="w-4 h-4 dark:text-white " />
                           )}
                         </button>
+
 
                         <span className="text-lg font-medium w-8 text-center dark:text-white">
                           {item.quantity}
@@ -254,7 +257,7 @@ const Cart = ({ products = [], user, setCartCount }) => {
                           className="p-2 rounded-full border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                         >
                           {AddingProductId === item.product._id ? (
-                            <Loader2 className="w-4 h-4 animate-spin" />
+                            <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
                           ) : (
                             <Plus className="w-4 h-4 dark:text-white" />
                           )}
@@ -270,7 +273,7 @@ const Cart = ({ products = [], user, setCartCount }) => {
           <div className="lg:col-span-4 mt-8 lg:mt-0">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
               <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Order Summary</h2>
-              
+
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
@@ -278,7 +281,7 @@ const Cart = ({ products = [], user, setCartCount }) => {
                     ₹{total.toLocaleString()}
                   </span>
                 </div>
-                
+
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-400">Shipping</span>
                   <span className="text-gray-900 dark:text-white font-medium">Free</span>
@@ -303,11 +306,10 @@ const Cart = ({ products = [], user, setCartCount }) => {
                 <button
                   onClick={handlePlaceorder}
                   disabled={outofstock}
-                  className={`w-full py-4 px-6 text-white font-medium rounded-lg flex items-center justify-center space-x-2 ${
-                    outofstock
+                  className={`w-full py-4 px-6 text-white font-medium rounded-lg flex items-center justify-center space-x-2 ${outofstock
                       ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
                       : 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600'
-                  } transition-colors`}
+                    } transition-colors`}
                 >
                   <Package className="w-5 h-5" />
                   <span>Place Order</span>

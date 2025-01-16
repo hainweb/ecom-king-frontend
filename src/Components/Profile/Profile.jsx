@@ -4,6 +4,9 @@ import Sidebar from "./Sidebar";
 import ProfileForm from "./ProfileForm";
 import AddressManager from "./AddressManager";
 import { ShoppingCart, Package, Heart, Bell } from 'lucide-react';
+import PasswordChange from "./PasswordChange";
+import ForgotPassword from "../Login/ForgotPassword";
+import PasswordAndSecurity from "./PasswordAndSecurity";
 
 const ProfilePage = ({ user }) => {
     const location = useLocation();
@@ -36,7 +39,7 @@ const ProfilePage = ({ user }) => {
                             <button className="relative group">
                                 <Bell className="w-5 h-5 text-white/90 group-hover:text-white transition-colors" />
                                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] flex items-center justify-center text-white">
-                                    2
+                                    0
                                 </span>
                             </button>
 
@@ -46,7 +49,7 @@ const ProfilePage = ({ user }) => {
 
                                     <Heart className="w-5 h-5 text-white/90 group-hover:text-white transition-colors" />
 
-                                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-white/80 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                    <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-white/80 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                                         Wishlist
                                     </span>
 
@@ -59,7 +62,7 @@ const ProfilePage = ({ user }) => {
 
                                     <ShoppingCart className="w-5 h-5 text-white/90 group-hover:text-white transition-colors" />
 
-                                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-white/80 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                    <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-white/80 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                                         Cart
                                     </span>
 
@@ -74,19 +77,21 @@ const ProfilePage = ({ user }) => {
                             }`}
                     >
                         {/* Recent Orders Preview */}
-                        <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg backdrop-blur-sm">
-                            { /*  <div className="flex items-center space-x-3">
-              <Package className="w-5 h-5 text-white/90" />
-            <div className="text-sm">
-                <p className="text-white font-medium">Recent Order</p>
-                <p className="text-white/70">Order #2024-123 is being prepared</p>
-              </div> 
-            </div>
-            <button className="px-3 py-1 text-sm text-white/90 hover:text-white border border-white/30 rounded-full hover:border-white/50 transition-colors">
-              Track
-            </button>
-            */}
+                        <div className="flex items-center justify-between p-4 bg-white/20 rounded-lg backdrop-blur-sm shadow-lg">
+                            <div className="flex items-center space-x-3">
+                                <Package className="w-6 h-6 text-white/90 hover:text-white transition-colors" />
+                                <div className="text-sm">
+                                    <p className="text-white font-semibold">Order Your Favorite Product</p>
+                                    <p className="text-white/70">We provide great results with quick delivery!</p>
+                                </div>
+                            </div>
+                            <Link to='/'>
+                                <button className="px-4 py-2 text-sm font-semibold text-white bg-blue-500 hover:bg-blue-600 border border-transparent rounded-full shadow-md transition-all duration-200 ease-in-out transform hover:scale-105">
+                                    Order Now
+                                </button>
+                            </Link>
                         </div>
+
 
                     </div>
 
@@ -104,10 +109,20 @@ const ProfilePage = ({ user }) => {
                         setIsMobileNavOpen={setIsMobileNavOpen}
                     />
 
-                    <div className="w-3/4 pl-4">
+                    <div className="w-full sm:w-3/4 pl-0 sm:pl-4">
+
                         {view === "profile" && <ProfileForm user={user} />}
                         {(view === "manageAddress" || view === "addAddress") && (
                             <AddressManager view={view} setView={setView} user={user} />
+                        )}
+                        {(view === "PasswordAndSecurity") && (
+                            <PasswordAndSecurity user={user} view={view} setView={setView} />
+                        )}
+                        {(view === "PasswordChange") && (
+                            <PasswordChange user={user} view={view} setView={setView} />
+                        )}
+                        {(view === "forgot") && (
+                            <ForgotPassword user={user} view={view} setView={setView} loginedUser={user} />
                         )}
                     </div>
                 </div>
