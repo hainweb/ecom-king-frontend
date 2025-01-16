@@ -6,7 +6,7 @@ import axios from 'axios';
 import { BASE_URL } from './Components/Urls/Urls';
 import Search from './Components/View-Products/Search';
 // Lazy load components
-import ProductList from './Components/View-Products/View-products';
+const ProductList = React.lazy(() => import('./Components/View-Products/View-products'));
 
 const Login = React.lazy(() => import('./Components/Login/Login'));
 const Signup = React.lazy(() => import('./Components/Signup/Signup'));
@@ -63,10 +63,7 @@ function App() {
         <div className="container" style={{ textAlign: 'center' }}>
           <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-<<<<<<< HEAD
             <p>Loading, please wait...</p>
-=======
->>>>>>> 9ca1e2e4de634fb4a9387f8b59a2519131e03f4f
           </div>
           
         </div>
@@ -97,18 +94,12 @@ function App() {
             <Route path="/profile" element={user ? <ProfilePage user={user} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
             <Route path="/search" element={<Search user={user} darkMode={darkMode} cartCount={cartCount} setDarkMode={setDarkMode} />} />
             <Route path="/product/:id" element={user? <ProductDisplay setCartCount={setCartCount} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
-<<<<<<< HEAD
             <Route path="/slider" element={<Slider />} />
             <Route path="/help-center" element={<ProtectedRoute component={HelpCenter} />} />
             <Route path="/forgot-password" element={<ForgotPassword/>} /> 
             <Route path="/terms" element={<TermsOfService/>} /> 
             <Route path="/privacy" element={<PrivacyPolicy/>} />
           </Routes>
-=======
-              <Route path="/slider" element={<Slider />} />
-              <Route path="/help-center" element={<ProtectedRoute component={HelpCenter} />} />
-            </Routes>
->>>>>>> 9ca1e2e4de634fb4a9387f8b59a2519131e03f4f
         </Suspense>
       </Router>
     </div> 
