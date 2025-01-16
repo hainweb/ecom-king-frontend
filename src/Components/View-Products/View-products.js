@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { BASE_URL, IMG_URL } from '../Urls/Urls';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-import { lazy, Suspense } from 'react';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { Slider } from './Slider'
 import BestOfElectronic from './BestOfElectronic';
@@ -237,38 +235,38 @@ const addToCart = useCallback(
                       </button>
                     )}
 
-                        {product.Quantity > 0 ? (
-                          <button
-                            onClick={() => addToCart(product._id)}
-                            className="flex justify-center items-center w-36 bg-indigo-600 text-white py-1.5 px-3 rounded-lg hover:bg-indigo-700 transition-colors text-xs font-medium"
-                          >
-                            <ShoppingCart className="w-5 h-5" />
-                            {addingToCartProductId === product._id ? (
-                              <span className="animate-pulse">Adding...</span>
-                            ) : alreadycart ? (
-                              alreadycartproduct === product._id ? (
-                                <div > {alreadycart}</div>
-                              ) : (
-                                'Add to cart'
-                              )
-                            ) : (
-                              'Add to Cart'
-                            )}
-                          </button>
+                    {product.Quantity > 0 ? (
+                      <button
+                        onClick={() => addToCart(product._id)}
+                        className="flex justify-center items-center w-36 bg-indigo-600 text-white py-1.5 px-3 rounded-lg hover:bg-indigo-700 transition-colors text-xs font-medium"
+                      >
+                        <ShoppingCart className="w-5 h-5" />
+                        {addingToCartProductId === product._id ? (
+                          <span className="animate-pulse">Adding...</span>
+                        ) : alreadycart ? (
+                          alreadycartproduct === product._id ? (
+                            <div>{alreadycart}</div>
+                          ) : (
+                            'Add to cart'
+                          )
                         ) : (
-                          <button
-                            disabled
-                            className="bg-gray-300 text-gray-600 py-2 px-4 rounded-lg cursor-not-allowed text-sm"
-                          >
-                            Out of Stock
-                          </button>
+                          'Add to cart'
                         )}
-                      </div>
-                    </div>
+                      </button>
+                    ) : (
+                      <button
+                        disabled
+                        className="bg-gray-300 text-gray-600 py-2 px-4 rounded-lg cursor-not-allowed text-sm"
+                      >
+                        Out of Stock
+                      </button>
+                    )}
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
 
         {/* Mobile: 2 column grid */}
         <div className="md:hidden grid grid-cols-2 gap-4">
