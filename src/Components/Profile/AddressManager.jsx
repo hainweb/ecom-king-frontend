@@ -78,6 +78,9 @@ const AddressManager = ({ view, setView, user }) => {
             {view === "manageAddress" ? (
                 <>
                     <h2 className="text-lg font-bold text-gray-900 dark:text-white mt-8 sm:mt-0 md:mt-0">Manage Addresses</h2>
+                    {addressLoading ?
+                        <Loader2 className="w-4 h-4 animate-spin text-black dark:text-white" />
+                        : ''}
                     <ul className="mt-4 space-y-4">
                         {Array.isArray(addresses) && addresses.length === 0 ? (
                             <p className="text-center text-gray-500 dark:text-gray-400">No addresses available.</p>
