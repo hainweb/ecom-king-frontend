@@ -243,7 +243,7 @@ const PasswordChange = ({ user, setView, isForgot }) => {
                         </p>
                         <div className="flex gap-4">
                             <Link
-                                to='/login'
+                                to='/logout'
                                 className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg"
                             >
                                 Login
