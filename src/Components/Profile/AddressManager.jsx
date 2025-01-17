@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Menu } from "@headlessui/react";
-import { MoreVertical } from "lucide-react";
+import { Loader2, MoreVertical } from "lucide-react";
 import { BASE_URL } from "../Urls/Urls";
 import AddressForm from "./AddressForm";
 
 const AddressManager = ({ view, setView, user }) => {
     const [editingAddressId, setEditingAddressId] = useState(null);
     const [addresses, setAddresses] = useState([]);
+    const [loading, setLoading] = useState(false)
+    const [addressLoading, setAddressLoading] = useState(false)
     const [addressData, setAddressData] = useState({
         Name: user?.Name || "",
         Mobile: user?.Mobile || "",
@@ -20,6 +22,7 @@ const AddressManager = ({ view, setView, user }) => {
 
     useEffect(() => {
         const fetchAddresses = async () => {
+            setLoading(true)
             try {
                 const response = await axios.get(
                     `${BASE_URL}/get-address`,
@@ -32,12 +35,14 @@ const AddressManager = ({ view, setView, user }) => {
                 console.error("Error fetching addresses:", error);
                 alert("Failed to fetch addresses. Please try again later.");
             }
+            setLoading(false)
         };
         fetchAddresses();
     }, []);
 
     const handleDeleteAddress = async (addressId) => {
         if (window.confirm("Are you sure you want to delete this address?")) {
+            setLoading(true)
             try {
                 const response = await axios.post(
                     `${BASE_URL}/delete-address`,
@@ -51,6 +56,7 @@ const AddressManager = ({ view, setView, user }) => {
                 console.error("Error deleting address:", error);
                 alert("Failed to delete address. Please try again later.");
             }
+            setLoading(false)
         }
     };
 
@@ -86,7 +92,9 @@ const AddressManager = ({ view, setView, user }) => {
                                         <AddressForm
                                             addressData={addressData}
                                             setAddressData={setAddressData}
+                                            loading={loading}
                                             onSubmit={async () => {
+                                                setLoading(true)
                                                 try {
                                                     const response = await axios.post(
                                                         `${BASE_URL}/edit-user-address`,
@@ -110,6 +118,7 @@ const AddressManager = ({ view, setView, user }) => {
                                                     console.error("Error updating address:", error);
                                                     alert("Failed to update address. Please try again later.");
                                                 }
+                                                setLoading(false)
                                             }}
                                             submitButtonText="Update Address"
                                             onCancel={() => {
@@ -130,6 +139,7 @@ const AddressManager = ({ view, setView, user }) => {
                                             address={addr}
                                             onEdit={() => startEditingAddress(addr)}
                                             onDelete={() => handleDeleteAddress(addr._id)}
+                                            loading={loading}
                                         />
                                     )}
                                 </div>
@@ -183,7 +193,8 @@ const AddressManager = ({ view, setView, user }) => {
     );
 };
 
-const AddressCard = ({ address, onEdit, onDelete }) => (
+const AddressCard = ({ address, onEdit, onDelete, loading }) => (
+
     <li className="border-b last:border-b-0 pb-4 border-gray-200 dark:border-gray-600">
         <div className="flex justify-between items-start">
             <div className="flex flex-col space-y-2">
@@ -216,7 +227,11 @@ const AddressCard = ({ address, onEdit, onDelete }) => (
                                     } group flex w-full items-center px-4 py-2 text-sm text-red-600 dark:text-red-400`}
                                 onClick={onDelete}
                             >
-                                Delete
+                                {loading ?
+                                    <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                                    :
+                                    'Delete'
+                                }
                             </button>
                         )}
                     </Menu.Item>
