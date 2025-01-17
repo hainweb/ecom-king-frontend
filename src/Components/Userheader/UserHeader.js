@@ -174,7 +174,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
         </Menu>
       </nav>
 
-      <div className="fixed top-16 left-0 w-full h-12 bg-gradient-to-b from-white to-transparent dark:from-gray-900 dark:to-transparent pointer-events-none z-50"></div>
+     <div className="fixed top-18 left-0 w-full h-12 bg-gradient-to-b from-gray-100 to-transparent dark:from-gray-900 dark:to-transparent pointer-events-none z-50"></div>
 
 
       {/* Bottom navigation for mobile view */}
