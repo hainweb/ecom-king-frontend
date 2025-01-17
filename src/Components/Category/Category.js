@@ -40,7 +40,7 @@ const Category = () => {
   if (error) return <div className="text-center mt-10 text-lg text-red-500">{error}</div>;
 
   return (
-    <div className="px-4 py-8 bg-white dark:bg-gray-900 min-h-screen">
+    <div className="px-4 py-8 mt-8 bg-white dark:bg-gray-900 min-h-screen">
 
       <div className="container mx-auto px-4 py-8 bg-white dark:bg-gray-900">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 capitalize">{thing} Products</h1>
