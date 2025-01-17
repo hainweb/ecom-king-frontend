@@ -116,7 +116,9 @@ const OrderTracking = ({ orderTrack, setOrderTrack }) => {
                                             disabled={track.status2 || isWithin8Hours(track.date)}
                                         >
                                             {loading ?
-                                                <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                                                <div className="flex justify-center items-center">
+                                                                     <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                                                                   </div>
                                                 :
                                                 ' Cancel Order'
                                             }
@@ -175,6 +177,9 @@ const ProductCard = ({ products, orderTrack }) => {
     const handleReturn = async (proId) => {
         const returndata = { proId: proId, orderId: Id, check: true };
         try {
+            const confirmCancel = window.confirm('Are you sure you want to return this order? This action cannot be undone.');
+            if (!confirmCancel) return;
+
             setLoading(true)
             const response = await axios.post(`${BASE_URL}/return-product`, { returndata }, { withCredentials: true });
 
@@ -231,7 +236,9 @@ const ProductCard = ({ products, orderTrack }) => {
                                         >
                                             <ArrowLeft className="w-4 h-4 mr-2" />
                                             {loading ?
-                                                <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                                                 <div className="flex justify-center items-center">
+                                                                      <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                                                                    </div>
                                                 :
                                                 'Return'
                                             }
