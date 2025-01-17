@@ -51,7 +51,7 @@ const ForgotPassword = ({ loginedUser }) => {
           setMessage('')
           setStage2(true)
           console.log('user', user);
-
+          setLoading(false)
         } else {
           setMessage(response.data.message)
         }
@@ -65,7 +65,7 @@ const ForgotPassword = ({ loginedUser }) => {
     } else {
       setMessage('Please enter a valid 10-digit mobile number.');
     }
-    setLoading(false)
+
 
   };
 
@@ -78,8 +78,7 @@ const ForgotPassword = ({ loginedUser }) => {
 
       if (response.data.status) {
         setStage3(true)
-        // showNotification(`OTP sent successfully to ${formData.Email}`); 
-        // setResendCooldown(6);
+        setLoading(false)
       } else {
         setNotification(response.data.message || "Error sending OTP.");
         setMessage(response.data.message || "Error sending OTP.")
@@ -108,7 +107,7 @@ const ForgotPassword = ({ loginedUser }) => {
       if (response.data.status) {
         setNotification({ show: true, message: "Otp Verified Successfully!", type: "success" });
         setStage4(true)
-
+        setLoading(false)
       } else {
         // Show error notification instead of setting info
         setNotification({ show: true, message: response.data.message, type: "error" });
@@ -217,7 +216,10 @@ const ForgotPassword = ({ loginedUser }) => {
                 type="submit"
                 className="w-full py-2 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 transition duration-200"
               >
-                {loading ? <Loader2 className="w-4 h-4 animate-spin dark:text-white" /> : "Verify OTP"}
+                {loading ? <div className="flex justify-center items-center">
+                  <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                </div>
+                  : "Verify OTP"}
               </button>
 
               <div className="p-4 text-center text-sm">
@@ -263,7 +265,9 @@ const ForgotPassword = ({ loginedUser }) => {
                 className="mt-6 w-full px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition duration-200"
                 onClick={sendOtpToEmail}
               >
-                {loading ? <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                {loading ? <div className="flex justify-center items-center">
+                  <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                </div>
                   :
                   'Send OTP to Email'
                 }
@@ -310,7 +314,10 @@ const ForgotPassword = ({ loginedUser }) => {
                   className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   {loading ?
-                    <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                    <div className="flex justify-center items-center">
+                      <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                    </div>
+
                     :
                     ' Find My Account'
                   }
