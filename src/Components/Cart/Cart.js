@@ -161,7 +161,7 @@ const Cart = ({ products = [], user, setCartCount }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 mt-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 mt-10">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white"> Cart</h1>
@@ -220,7 +220,7 @@ const Cart = ({ products = [], user, setCartCount }) => {
                         ) : null}
                       </div>
 
-                      <div className="flex items-center mb-4 sm:mb-0 md:mb-0 space-x-3">
+                      <div className="flex items-center  mb-16 sm:mb-0 md:mb-0 space-x-3">
                         <button
                           onClick={() => decCartQuantity(item._id, item.product._id, user, -1)}
                           disabled={DecProductId === item.product._id}
