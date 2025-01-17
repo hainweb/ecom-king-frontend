@@ -5,7 +5,7 @@ import { BASE_URL } from '../Urls/Urls';
 import { Link } from 'react-router-dom';
 
 const PasswordChange = ({ user, setView, isForgot }) => {
-    const { loading, setLoading } = useState(false)
+      const [ loading, setLoading ] = useState(false)
     const [formData, setFormData] = useState({
         previousPassword: '',
         newPassword: '',
