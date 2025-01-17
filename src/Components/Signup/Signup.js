@@ -77,8 +77,8 @@ const Signup = ({ setUser, setCartCount }) => {
       setInfo("Mobile must be 10 digits");
       return false;
     }
-    if (formData.Password.length < 4) {
-      setInfo("Password must be at least 4 characters");
+    if (formData.Password.length < 6) {
+      setInfo("Password must be at least 6 characters");
       return false;
     }
     if (formData.Password !== formData.ConfirmPassword) {
