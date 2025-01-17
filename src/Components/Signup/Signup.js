@@ -386,7 +386,9 @@ const Signup = ({ setUser, setCartCount }) => {
               type="submit"
               className="w-full py-2 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 transition duration-200"
             >
-              {loading ?  <Loader2 className="w-4 h-4 animate-spin dark:text-white" /> : "Send OTP"}
+              {loading ? <div className="flex justify-center items-center">
+                <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+              </div> : "Send OTP"}
             </button>
           </form>
         )}
@@ -409,7 +411,9 @@ const Signup = ({ setUser, setCartCount }) => {
               type="submit"
               className="w-full py-2 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 transition duration-200"
             >
-              {loading ?  <Loader2 className="w-4 h-4 animate-spin dark:text-white" /> : "Verify OTP"}
+              {loading ? <div className="flex justify-center items-center">
+                <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+              </div> : "Verify OTP"}
             </button>
             <button
               type="button"
