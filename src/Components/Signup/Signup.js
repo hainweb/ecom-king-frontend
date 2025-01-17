@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Urls/Urls";
-import { User, Lock, Phone, Mail, ShoppingCart, X, EyeOff, Eye } from "lucide-react";
+import { User, Lock, Phone, Mail, ShoppingCart, X, EyeOff, Eye, Loader2 } from "lucide-react";
 
 const Signup = ({ setUser, setCartCount }) => {
   const [loading, setLoading] = useState(false);
@@ -386,7 +386,7 @@ const Signup = ({ setUser, setCartCount }) => {
               type="submit"
               className="w-full py-2 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 transition duration-200"
             >
-              {loading ? <div className="loader" /> : "Send OTP"}
+              {loading ?  <Loader2 className="w-4 h-4 animate-spin dark:text-white" /> : "Send OTP"}
             </button>
           </form>
         )}
@@ -409,7 +409,7 @@ const Signup = ({ setUser, setCartCount }) => {
               type="submit"
               className="w-full py-2 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 transition duration-200"
             >
-              {loading ? <div className="loader" /> : "Verify OTP"}
+              {loading ?  <Loader2 className="w-4 h-4 animate-spin dark:text-white" /> : "Verify OTP"}
             </button>
             <button
               type="button"
