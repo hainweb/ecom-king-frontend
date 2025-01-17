@@ -134,7 +134,9 @@ const ReturnOrder = () => {
                     className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
                 >
                     {loading ?
-                        <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                         <div className="flex justify-center items-center">
+                         <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                       </div>
                         :
                         'Submit'
                     }
