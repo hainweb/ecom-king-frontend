@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL } from '../Urls/Urls';
-import { User, Lock, Eye, EyeOff } from 'lucide-react';
+import { User, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
 
 const Login = ({ setUser, setCartCount }) => {
   const [loading, setLoading] = useState(false);
@@ -113,6 +113,7 @@ const Login = ({ setUser, setCartCount }) => {
         setLoading(false);
       });
   };
+  
 
   return (
     <div className="relative min-h-screen flex justify-center items-center bg-white dark:bg-gray-900 overflow-hidden">
@@ -215,9 +216,7 @@ const Login = ({ setUser, setCartCount }) => {
           >
             {loading ? (
               <div className="flex space-x-1">
-                <span className="block w-2 h-2 bg-white rounded-full animate-bounce" />
-                <span className="block w-2 h-2 bg-white rounded-full animate-bounce delay-100" />
-                <span className="block w-2 h-2 bg-white rounded-full animate-bounce delay-200" />
+                 <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
               </div>
             ) : (
               'Login'
