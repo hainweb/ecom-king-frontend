@@ -13,7 +13,7 @@ const Logout = ({ setUser, setCartCount }) => {
         console.log('Logged out successfully');
         setUser(null);         // Clear user data
         setCartCount(0);       // Reset cart count to 0
-        navigate('/');        // Redirect to login page (or change to '/login' if needed)
+        navigate('/login');        // Redirect to login page (or change to '/login' if needed)
       })
       .catch((error) => {
         console.error('Logout failed', error);
