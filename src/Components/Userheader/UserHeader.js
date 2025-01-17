@@ -7,24 +7,14 @@ import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'; // Updated imp
 
 
 function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
-  // State to manage dark mode
-
   // Toggle Dark Mode
   const toggleDarkMode = () => {
     setDarkMode(prevMode => !prevMode);
   };
 
-  // Apply dark mode to body based on state
-  /*useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
-  }, [darkMode]); */
-
   return (
-    <header className={`fixed top-0 z-50 w-full ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'} shadow-xl transition-all ease-in-out`}>
+    <header className={`fixed top-0 z-50 w-full ${darkMode ? 'bg-gray-900 text-white shadow-lg shadow-gray-800/100' : 'bg-white text-gray-800 shadow-lg shadow-gray-200/100'} transition-all ease-in-out`}>
+      
       <nav className="navbar navbar-expand-lg navbar-light p-4 flex justify-between items-center max-w-screen-xl mx-auto">
         {/* Brand/logo */}
         <Link className="text-3xl font-bold text-blue-600 hover:text-blue-800 transition duration-200" to="/">
@@ -122,13 +112,9 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
               >
                 Login / Sign Up
               </button>
-
-
             </Link>
           )}
         </div>
-
-
 
         <div>
           <Link to="/search" >
@@ -161,7 +147,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
             <MenuButton
               className={`inline-flex justify-center items-center p-2 rounded-full ${darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-white text-gray-900 hover:bg-gray-50'} shadow-sm ring-1 ring-gray-300 `}
             >
-              <EllipsisVerticalIcon className="h-4 w-4 " /> {/* Updated Icon */}
+              <EllipsisVerticalIcon className="h-4 w-4 " />
             </MenuButton>
           </div>
 
@@ -170,29 +156,32 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
             className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none"
           >
            <div className="py-1">
-  <Menu.Item>
-    {({ active }) => (
-      <button
-        className={`${active ? 
-          (darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-900 text-white hover:bg-gray-700') 
-          : 'text-gray-700 hover:bg-gray-200'} 
-          block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
-        onClick={() => console.log('Download App clicked')}
-      >
-        Download App
-      </button>
-    )}
-  </Menu.Item>
-</div>
-
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`${active ? 
+                      (darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-900 text-white hover:bg-gray-700') 
+                      : 'text-gray-700 hover:bg-gray-200'} 
+                      block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
+                    onClick={() => console.log('Download App clicked')}
+                  >
+                    Download App
+                  </button>
+                )}
+              </Menu.Item>
+            </div>
           </Menu.Items>
         </Menu>
-
-
       </nav>
 
+      <div className="fixed top-16 left-0 w-full h-12 bg-gradient-to-b from-white to-transparent dark:from-gray-900 dark:to-transparent pointer-events-none z-50"></div>
+
+
       {/* Bottom navigation for mobile view */}
-      <nav className={`lg:hidden fixed bottom-0 left-0 w-full py-4 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
+      <div className="fixed bottom-16 left-0 w-full h-8 bg-gradient-to-b from-transparent to-white dark:from-transparent dark:to-gray-900 pointer-events-none z-50 sm:bottom-0"></div>
+
+      <nav className={`lg:hidden fixed bottom-0 left-0 w-full py-4 ${darkMode ? 'bg-gray-900 shadow-lg shadow-gray-800/100' : 'bg-white shadow-lg shadow-gray-200/100'}`}>
+      
         <ul className="flex justify-around items-center">
           <li>
             <Link className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${darkMode ? 'text-white' : 'text-gray-700'}`} to="/">
@@ -203,14 +192,12 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
 
           <li>
             <Link className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${darkMode ? 'text-white' : 'text-gray-700'}`} to="/cart">
-
               <div className="cart-icon-container">
                 <ShoppingCart color={darkMode ? "#ffffff" : "#0d0d0d"} />
                 {cartCount > 0 && (
-                  <span className="cart-count-badge ">
+                  <span className="cart-count-badge">
                     {cartCount}
                   </span>
-
                 )}
               </div>
               Cart
@@ -231,7 +218,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
           </li>
         </ul>
       </nav>
-
+      
     </header>
   );
 }
