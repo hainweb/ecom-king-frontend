@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../Urls/Urls";
+import { Loader2 } from "lucide-react";
 
 const ProfileForm = ({ user }) => {
+    const [loading, setLoading] = useState(false)
     const [isEditing, setIsEditing] = useState(false);
     const [errors, setErrors] = useState({});
     const [profileData, setProfileData] = useState({
@@ -34,6 +36,7 @@ const ProfileForm = ({ user }) => {
     };
 
     const handleProfileSave = async () => {
+        setLoading(true)
         if (!validateProfileFields()) return;
         try {
             const response = await axios.post(
@@ -48,6 +51,8 @@ const ProfileForm = ({ user }) => {
             console.error("Error updating profile:", error);
             alert("Failed to update profile. Please try again later.");
         }
+
+        setLoading(false)
     };
 
     return (
@@ -159,7 +164,11 @@ const ProfileForm = ({ user }) => {
                             onClick={handleProfileSave}
                             className="bg-green-500 dark:bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-600 dark:hover:bg-green-700"
                         >
-                            Save
+                            {loading ?
+                                <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                                :
+                                'Save'
+                            }
                         </button>
                     ) : (
                         <button
