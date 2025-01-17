@@ -2,19 +2,21 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { BASE_URL } from '../Urls/Urls';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AlertTriangle, Truck, Package, XCircle, ArrowLeft, Clock } from 'lucide-react';
+import { AlertTriangle, Truck, Package, XCircle, ArrowLeft, Clock, Loader2 } from 'lucide-react';
 
 const OrderTracking = ({ orderTrack, setOrderTrack }) => {
+    const [loading, setLoading] = useState(false)
     const handleCancelOrder = async (orderId) => {
         try {
             const confirmCancel = window.confirm('Are you sure you want to cancel this order? This action cannot be undone.');
             if (!confirmCancel) return;
-
+            setLoading(true)
             const response = await axios.post(`${BASE_URL}/cancel-order`, { orderId }, { withCredentials: true });
             if (response.data.status) {
                 setOrderTrack(response.data.orderTrack);
                 alert(response.data.message || 'Order canceled successfully');
             }
+            setLoading(false)
         } catch (error) {
             console.error('Error canceling order:', error);
             alert('Failed to cancel the order');
@@ -113,7 +115,11 @@ const OrderTracking = ({ orderTrack, setOrderTrack }) => {
                                             onClick={() => handleCancelOrder(track._id)}
                                             disabled={track.status2 || isWithin8Hours(track.date)}
                                         >
-                                            Cancel Order
+                                            {loading ?
+                                                <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                                                :
+                                                ' Cancel Order'
+                                            }
                                         </button>
                                     </div>
                                 )}
@@ -164,10 +170,12 @@ const ProductCard = ({ products, orderTrack }) => {
     const [error, setError] = useState('');
     const { Id } = useParams();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
 
     const handleReturn = async (proId) => {
         const returndata = { proId: proId, orderId: Id, check: true };
         try {
+            setLoading(true)
             const response = await axios.post(`${BASE_URL}/return-product`, { returndata }, { withCredentials: true });
 
             if (response.data.status) {
@@ -175,6 +183,7 @@ const ProductCard = ({ products, orderTrack }) => {
             } else {
                 alert('Failed to return the product: ' + response.data.message);
             }
+            setLoading(false)
         } catch (error) {
             setError('Error returning the product: ' + error);
         }
@@ -203,7 +212,7 @@ const ProductCard = ({ products, orderTrack }) => {
                                     </div>
                                 )}
                             </div>
-                            
+
                             <div className="p-4">
                                 <h3 className="font-bold text-lg mb-2 line-clamp-1">
                                     {product.product?.Name}
@@ -221,7 +230,11 @@ const ProductCard = ({ products, orderTrack }) => {
                                             className="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300"
                                         >
                                             <ArrowLeft className="w-4 h-4 mr-2" />
-                                            Return
+                                            {loading ?
+                                                <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                                                :
+                                                'Return'
+                                            }
                                         </button>
                                     )}
                                 </div>
@@ -238,7 +251,7 @@ const OrderPage = () => {
     const [orderTrack, setOrderTrack] = useState([]);
     const [products, setProducts] = useState([]);
     const { Id } = useParams();
-    const [loading,setLoading]=useState(true)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -247,14 +260,14 @@ const OrderPage = () => {
                 const response = await axios.get(`${BASE_URL}/view-orders-products/${Id}`, {
                     withCredentials: true,
                 });
-                console.log('view ordered pro',response.data.products);
+                console.log('view ordered pro', response.data.products);
 
                 setProducts(response.data.products);
                 setOrderTrack(response.data.ordertrack);
-              setLoading(false)
+                setLoading(false)
             } catch (error) {
                 console.error('Error fetching order details:', error);
-               
+
             }
         };
 
@@ -263,17 +276,19 @@ const OrderPage = () => {
 
     if (loading) {
         return (
-          <div className="row">
-            <div className="container" style={{ textAlign: 'center' }}>
-              <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-              </div>
-              <p>Loading, please wait...</p>
+            <div className="row">
+                <div className="container" style={{ textAlign: 'center' }}>
+                    <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 flex-col">
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                        <br />
+                        <p>Loading, please wait...</p>
+                    </div>
+
+                </div>
             </div>
-          </div>
-    
+
         );
-      }
+    }
 
     return (
         <>
