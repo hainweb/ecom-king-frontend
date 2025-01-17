@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../Urls/Urls";
+import { Loader2 } from "lucide-react";
 
 const ReturnOrder = () => {
     const [selectedReason, setSelectedReason] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
-
+    const [loading, setLoading] = useState(false)
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const proId = queryParams.get("proId");
@@ -60,11 +61,13 @@ const ReturnOrder = () => {
         };
 
         try {
+            setLoading(true)
             const response = await axios.post(
                 `${BASE_URL}/return-product`,
                 { returndata },
                 { withCredentials: true }
             );
+            setLoading(false)
 
             if (response.data.status) {
                 alert(response.data.message);
@@ -130,7 +133,11 @@ const ReturnOrder = () => {
                     type="submit"
                     className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
                 >
-                    Submit
+                    {loading ?
+                        <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                        :
+                        'Submit'
+                    }
                 </button>
             </form>
         </div>
