@@ -114,7 +114,9 @@ const PlaceOrderForm = ({ user, setSuccess, setCartCount }) => {
 
         {productLoading ?
           (
-            <Loader2 className="w-4 h-4 animate-spin text-black dark:text-white" />
+            <div className="flex justify-center items-center">
+            <Loader2 className="w-6 h-6 animate-spin text-black dark:text-white" />
+          </div>
           )
           :
 
@@ -235,7 +237,9 @@ const PlaceOrderForm = ({ user, setSuccess, setCartCount }) => {
               disabled={!selectedAddress || paymentMethod === "ONLINE"}
             >
               {loading ?
-                <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                 <div className="flex justify-center items-center">
+                 <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+               </div>
                 :
                 ' Complete Order'
               }
