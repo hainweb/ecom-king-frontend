@@ -22,10 +22,10 @@ const ProfilePage = React.lazy(() => import('./Components/Profile/Profile'));
 const Category = React.lazy(() => import('./Components/Category/Category'));
 const ProductDisplay = React.lazy(() => import('./Components/View-Products/Products'));
 const Slider = React.lazy(() => import('./Components/View-Products/Slider'));
-const ForgotPassword = React.lazy(()=> import('./Components/Login/ForgotPassword'));
+const ForgotPassword = React.lazy(() => import('./Components/Login/ForgotPassword'));
 const HelpCenter = React.lazy(() => import('./Components/HelpCenter/HelpCenter'));
 const TermsOfService = React.lazy(() => import('./Components/TermsAndPrivasy/TermsOfServices'));
-const PrivacyPolicy = React.lazy(()=>import ('./Components/TermsAndPrivasy/PrivacyPolicy'))
+const PrivacyPolicy = React.lazy(() => import('./Components/TermsAndPrivasy/PrivacyPolicy'))
 
 function App() {
   const [user, setUser] = useState(null);
@@ -65,7 +65,7 @@ function App() {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
             <p>Loading, please wait...</p>
           </div>
-          
+
         </div>
       </div>
 
@@ -77,7 +77,14 @@ function App() {
     <div className={`${darkMode ? 'dark' : 'light'}`}>
       <Router>
         <Layout user={user} cartCount={cartCount} darkMode={darkMode} setDarkMode={setDarkMode} />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={
+
+          <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+
+          </div>
+
+        }>
           <Routes>
             <Route path="/" element={<ProductList setCartCount={setCartCount} />} />
             <Route path="/login" element={<Login setCartCount={setCartCount} setUser={setUser} />} />
@@ -93,17 +100,17 @@ function App() {
             <Route path="/return" element={<ProtectedRoute component={ReturnOrder} />} />
             <Route path="/profile" element={user ? <ProfilePage user={user} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
             <Route path="/search" element={<Search user={user} darkMode={darkMode} cartCount={cartCount} setDarkMode={setDarkMode} />} />
-            <Route path="/product/:id" element={user? <ProductDisplay setCartCount={setCartCount} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
+            <Route path="/product/:id" element={user ? <ProductDisplay setCartCount={setCartCount} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
             <Route path="/slider" element={<Slider />} />
             <Route path="/help-center" element={<ProtectedRoute component={HelpCenter} />} />
-            <Route path="/forgot-password" element={<ForgotPassword/>} /> 
-            <Route path="/terms" element={<TermsOfService/>} /> 
-            <Route path="/privacy" element={<PrivacyPolicy/>} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
           </Routes>
         </Suspense>
       </Router>
-    </div> 
+    </div>
   );
 }
- 
+
 export default App;
