@@ -163,10 +163,11 @@ const Login = ({ setUser, setCartCount }) => {
               onChange={handleChange}
               placeholder="Mobile"
             />
-            {errors.Mobile && (
+            
+          </div>
+          {errors.Mobile && (
               <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.Mobile}</p>
             )}
-          </div>
 
           <div className="relative">
             <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" />
@@ -185,10 +186,11 @@ const Login = ({ setUser, setCartCount }) => {
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
-            {errors.Password && (
+           
+          </div>
+           {errors.Password && (
               <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.Password}</p>
             )}
-          </div>
 
           {loginErr && !timeLeft && (
             <p className="text-red-500 dark:text-red-400 text-sm">{loginErr}</p>
