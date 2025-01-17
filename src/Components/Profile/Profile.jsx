@@ -21,7 +21,7 @@ const ProfilePage = ({ user }) => {
 
             <div className="w-full bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 dark:from-blue-700 dark:via-blue-800 dark:to-blue-900 mt-36 sm:mt-20 md:mt-20">
                 <div
-                    className={`relative py-4 px-6 transition-all duration-500 ease-out ${isExpanded ? 'pb-24' : ''}`}
+                    className={`relative py-4 px-6 transition-all duration-500 ease-out ${isExpanded ? 'pb-28' : ''}`}
                     onMouseEnter={() => setIsExpanded(true)}
                     onMouseLeave={() => setIsExpanded(false)}
                 >
