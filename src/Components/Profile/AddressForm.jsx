@@ -1,6 +1,7 @@
+import { Loader2 } from "lucide-react";
 import React, { useState } from "react";
 
-const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, onCancel }) => {
+const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, onCancel, loading }) => {
     const [errors, setErrors] = useState({});
 
     const handleAddressChange = (e) => {
@@ -40,9 +41,8 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                     value={addressData.Name}
                     onChange={handleAddressChange}
                     placeholder="Name"
-                    className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                        errors.Name ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-                    }`}
+                    className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.Name ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                        }`}
                 />
                 {errors.Name && <p className="text-red-500 text-xs">{errors.Name}</p>}
             </div>
@@ -53,9 +53,8 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                 value={addressData.Mobile}
                 onChange={handleAddressChange}
                 placeholder="Mobile"
-                className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                    errors.Mobile ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-                }`}
+                className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.Mobile ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                    }`}
             />
             {errors.Mobile && <p className="text-red-500 text-xs">{errors.Mobile}</p>}
 
@@ -64,9 +63,8 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                 value={addressData.Address}
                 onChange={handleAddressChange}
                 placeholder="Enter your address"
-                className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                    errors.Address ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-                }`}
+                className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.Address ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                    }`}
                 rows={3}
             />
             {errors.Address && <p className="text-red-500 text-xs">{errors.Address}</p>}
@@ -77,9 +75,8 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                 value={addressData.Pincode}
                 onChange={handleAddressChange}
                 placeholder="Pincode"
-                className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                    errors.Pincode ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-                }`}
+                className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.Pincode ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                    }`}
             />
             {errors.Pincode && <p className="text-red-500 text-xs">{errors.Pincode}</p>}
 
@@ -91,9 +88,8 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                     name="State"
                     value={addressData.State}
                     onChange={handleAddressChange}
-                    className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                        errors.State ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-                    }`}
+                    className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.State ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                        }`}
                 >
                     <option value="">Select State</option>
                     <option value="kerala">Kerala</option>
@@ -108,9 +104,8 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                 value={addressData.City}
                 onChange={handleAddressChange}
                 placeholder="City"
-                className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                    errors.City ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-                }`}
+                className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.City ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                    }`}
             />
             {errors.City && <p className="text-red-500 text-xs">{errors.City}</p>}
 
@@ -122,9 +117,8 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                     name="Type"
                     value={addressData.Type}
                     onChange={handleAddressChange}
-                    className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                        errors.Type ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-                    }`}
+                    className={`border p-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.Type ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                        }`}
                 >
                     <option value="">Select Type</option>
                     <option value="Home">Home</option>
@@ -139,7 +133,11 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                     onClick={handleSubmit}
                     className="bg-green-500 dark:bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-600 dark:hover:bg-green-700"
                 >
-                    {submitButtonText}
+                    {loading ?
+                        <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                        :
+                        { submitButtonText }
+                    }
                 </button>
                 {onCancel && (
                     <button
