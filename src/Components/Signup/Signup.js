@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Urls/Urls";
-import { User, Lock, Phone, Mail, ShoppingCart, X } from "lucide-react";
+import { User, Lock, Phone, Mail, ShoppingCart, X, EyeOff, Eye } from "lucide-react";
 
 const Signup = ({ setUser, setCartCount }) => {
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
     Name: "",
     LastName: "",
@@ -13,7 +15,7 @@ const Signup = ({ setUser, setCartCount }) => {
     Email: "",
     Mobile: "",
     Password: "",
-    ConfirmPassword: "", 
+    ConfirmPassword: "",
   });
   const [step, setStep] = useState(1);
   const [otp, setOtp] = useState("");
@@ -345,24 +347,39 @@ const Signup = ({ setUser, setCartCount }) => {
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
-                className="w-full pl-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                type="password"
+                className="w-full pl-10 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                type={showPassword ? "text" : "password"}
                 name="Password"
                 value={formData.Password}
                 onChange={handleChange}
                 placeholder="Password"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
+
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
-                className="w-full pl-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                type="password"
+                className="w-full pl-10 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                type={showConfirmPassword ? "text" : "password"}
                 name="ConfirmPassword"
                 value={formData.ConfirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm Password"
               />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
+              >
+                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
             {info && <p className="text-red-500 text-sm">{info}</p>}
             <button
