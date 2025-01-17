@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { EyeIcon, EyeOffIcon, LockIcon } from 'lucide-react';
+import { EyeIcon, EyeOffIcon, Loader2, LockIcon } from 'lucide-react';
 import axios from 'axios';
 import { BASE_URL } from '../Urls/Urls';
 import { Link } from 'react-router-dom';
 
 const PasswordChange = ({ user, setView, isForgot }) => {
+    const { loading, setLoading } = useState(false)
     const [formData, setFormData] = useState({
         previousPassword: '',
         newPassword: '',
@@ -77,7 +78,7 @@ const PasswordChange = ({ user, setView, isForgot }) => {
             setError('New password must be different from the previous password');
             return;
         }
-
+        setLoading(true)
         try {
             const payload = isForgot
                 ? { userId, isForgot, newPassword: formData.newPassword }
@@ -88,7 +89,7 @@ const PasswordChange = ({ user, setView, isForgot }) => {
             if (response.data.status) {
                 setSuccessMessage(response.data.message);
                 setFormData({ previousPassword: '', newPassword: '', confirmPassword: '' });
-                setPasswordStrength({ score: 0, requirements: { length: false, lowercase: false} });
+                setPasswordStrength({ score: 0, requirements: { length: false, lowercase: false } });
                 setShowSuccessModal(true);
             } else {
                 setError(response.data.message || 'An error occurred.');
@@ -100,10 +101,11 @@ const PasswordChange = ({ user, setView, isForgot }) => {
             console.error('Error:', err);
             setError('An error occurred while changing your password. Please try again.');
         }
+        setLoading(false)
     };
 
     const getStrengthColor = () => {
-        const colors = [ 'bg-green-500','bg-yellow-500' ];
+        const colors = ['bg-green-500', 'bg-yellow-500'];
         return colors[passwordStrength.score] || colors[0];
     };
 
@@ -180,9 +182,8 @@ const PasswordChange = ({ user, setView, isForgot }) => {
                                 {[...Array(2)].map((_, i) => (
                                     <div
                                         key={i}
-                                        className={`h-full w-full rounded-full transition-colors ${
-                                            i < passwordStrength.score ? getStrengthColor() : 'bg-gray-200'
-                                        }`}
+                                        className={`h-full w-full rounded-full transition-colors ${i < passwordStrength.score ? getStrengthColor() : 'bg-gray-200'
+                                            }`}
                                     />
                                 ))}
                             </div>
@@ -193,7 +194,7 @@ const PasswordChange = ({ user, setView, isForgot }) => {
                                 <li className={passwordStrength.requirements.lowercase ? 'text-green-500' : ''}>
                                     ✓ At least one lowercase letter
                                 </li>
-                              
+
                             </ul>
                         </div>
                     </div>
@@ -226,7 +227,11 @@ const PasswordChange = ({ user, setView, isForgot }) => {
                         disabled={timeLeft > 0 || passwordStrength.score < 2}
                         className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white rounded-lg transition-colors duration-200 disabled:cursor-not-allowed"
                     >
-                        Change Password
+                        {loading ?
+                            <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                            :
+                            'Change Password'
+                        }
                     </button>
                 </form>
             </div>
