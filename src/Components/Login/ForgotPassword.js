@@ -82,9 +82,10 @@ const ForgotPassword = ({ loginedUser }) => {
       } else {
         setNotification(response.data.message || "Error sending OTP.");
         setMessage(response.data.message || "Error sending OTP.")
+         setLoading(false)
       }
-    })
-    setLoading(false)
+    }) 
+   
   };
 
   const handleOtpChange = (e) => {
@@ -257,7 +258,7 @@ const ForgotPassword = ({ loginedUser }) => {
               </div>
 
               <div className="p-4 text-center text-sm">
-                <p>{message}</p>
+                <p className='text-red-600'>{message}</p>
               </div>
 
               {/* Send OTP Button */}
