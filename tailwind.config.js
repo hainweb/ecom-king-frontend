@@ -41,11 +41,20 @@ module.exports = {
             opacity: '1',
           },
         },
+        'fadeInOut': {
+          '0%, 100%': {
+            opacity: '0',
+          },
+          '50%': {
+            opacity: '1',
+          },
+        },
       },
       animation: {
         'notification-enter': 'notification-enter 0.5s ease-out forwards',
         'progress-bar': 'progress-bar 5s linear forwards',
         'notification-slide-in': 'notification-slide-in 0.5s ease-out forwards',
+        'fadeInOut': 'fadeInOut 2s ease-in-out infinite', // New animation added
       },
     },
   },
