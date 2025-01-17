@@ -195,7 +195,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
               <div className="cart-icon-container">
                 <ShoppingCart color={darkMode ? "#ffffff" : "#0d0d0d"} />
                 {cartCount > 0 && (
-                  <span className="cart-count-badge">
+                  <span className="mt-2 cart-count-badge">
                     {cartCount}
                   </span>
                 )}
