@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { BASE_URL } from '../Urls/Urls';
-import { Lock } from 'lucide-react';
+import { Loader2, Lock } from 'lucide-react';
 import PasswordChange from '../Profile/PasswordChange';
 
 const ForgotPassword = ({ loginedUser }) => {
@@ -38,6 +38,7 @@ const ForgotPassword = ({ loginedUser }) => {
   };
 
   const handleFormSubmit = (e) => {
+    setLoading(true)
     e.preventDefault();
     // Simulate an API call
     if (Mobile.length === 10) {
@@ -64,9 +65,12 @@ const ForgotPassword = ({ loginedUser }) => {
     } else {
       setMessage('Please enter a valid 10-digit mobile number.');
     }
+    setLoading(false)
+
   };
 
   const sendOtpToEmail = () => {
+    setLoading(true)
     // Add logic to send OTP
     console.log("OTP sent to", user.Email);
     axios.post(`${BASE_URL}/forgot-send-otp`, user, { withCredentials: true }).then((response) => {
@@ -81,6 +85,7 @@ const ForgotPassword = ({ loginedUser }) => {
         setMessage(response.data.message || "Error sending OTP.")
       }
     })
+    setLoading(false)
   };
 
   const handleOtpChange = (e) => {
@@ -190,7 +195,7 @@ const ForgotPassword = ({ loginedUser }) => {
 
         {stage4 ? (
 
-          <PasswordChange user={user} isForgot={true}/>
+          <PasswordChange user={user} isForgot={true} />
 
         ) :
           stage3 ? (
@@ -212,7 +217,7 @@ const ForgotPassword = ({ loginedUser }) => {
                 type="submit"
                 className="w-full py-2 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 transition duration-200"
               >
-                {loading ? <div className="loader" /> : "Verify OTP"}
+                {loading ? <Loader2 className="w-4 h-4 animate-spin dark:text-white" /> : "Verify OTP"}
               </button>
 
               <div className="p-4 text-center text-sm">
@@ -258,7 +263,10 @@ const ForgotPassword = ({ loginedUser }) => {
                 className="mt-6 w-full px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition duration-200"
                 onClick={sendOtpToEmail}
               >
-                Send OTP to Email
+                {loading ? <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                  :
+                  'Send OTP to Email'
+                }
               </button>
 
 
@@ -269,7 +277,7 @@ const ForgotPassword = ({ loginedUser }) => {
 
 
               <p className="mt-4 text-sm">
-                Enter your mobile number, and we'll send you a password recovery link.
+                Enter your mobile number, and we'll send a OTP to your email.
               </p>
 
               <form onSubmit={handleFormSubmit} className="mt-6">
@@ -301,7 +309,11 @@ const ForgotPassword = ({ loginedUser }) => {
                   type="submit"
                   className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  Find My Account
+                  {loading ?
+                    <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                    :
+                    ' Find My Account'
+                  }
                 </button>
               </form>
             </div>
