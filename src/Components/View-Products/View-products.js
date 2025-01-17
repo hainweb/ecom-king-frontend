@@ -126,7 +126,7 @@ const addToCart = useCallback(
   return (
     <div className="transition-all duration-300 mt-5">
 
-      <div className="py-2 mt-16 bg-gray-100 dark:bg-gray-800">
+      <div className="py-2 mt-20 bg-gray-100 dark:bg-gray-800">
         <Slider />
       </div>
 
