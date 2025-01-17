@@ -135,6 +135,8 @@ function UserHeader({ cartCount, user, setDarkMode, darkMode }) {
                         autoFocus
                     />
                 </div>
+                <div className="fixed top-18 mt-16 sm:mt-0 md:mt-0 left-0 w-full h-10 bg-transparent dark:bg-gradient-to-b dark:from-gray-900 dark:to-transparent pointer-events-none z-50"></div>
+
             </header>
 
             {searchTerm.trim() === '' ? (
@@ -142,9 +144,11 @@ function UserHeader({ cartCount, user, setDarkMode, darkMode }) {
                     <p className={`text-2xl font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                         Search a product 
                     </p>
+                    
                 </div>
             ) : (
-                <div className={`fixed w-full overflow-y-auto min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-100'} transition-all duration-300`}
+                
+                <div className={`fixed w-full overflow-y-auto min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-100'} mt-12 sm:mt-0 md:mt-0 transition-all duration-300`}
                     style={{ top: '70px', maxHeight: 'calc(100vh - 160px)', zIndex: 40 }}>
                     <div className="container mx-auto px-4 py-6">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
