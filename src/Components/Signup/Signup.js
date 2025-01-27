@@ -103,10 +103,12 @@ const Signup = ({ setUser, setCartCount }) => {
     try {
       setLoading(true);
       const response = await axios.post(`${BASE_URL}/send-otp`, formData);
+      console.log('response snd sms',response);
+      
       if (response.data.status) {
         setStep(3);
         showNotification(`OTP sent successfully to ${formData.Email}`);
-        setResendCooldown(6);
+        setResendCooldown(60);
       } else {
         setInfo(response.data.message || "Error sending OTP.");
       }
@@ -147,7 +149,7 @@ const Signup = ({ setUser, setCartCount }) => {
 
     try {
       setLoading(true);
-      const response = await axios.post(`${BASE_URL}/verify-otp`, { otp, ...formData });
+      const response = await axios.post(`${BASE_URL}/verify-otp`, { otp, ...formData },   {withCredentials:true});
       console.log('rejndjnd', response);
 
       if (response.data.status) {
