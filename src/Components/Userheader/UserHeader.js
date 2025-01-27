@@ -178,7 +178,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
 
 
       {/* Bottom navigation for mobile view */}
-      <div className="fixed bottom-16 mb-2 left-0 w-full h-6 bg-gradient-to-b from-transparent to-white dark:from-transparent dark:to-gray-900 pointer-events-none z-50 sm:bottom-0"></div>
+      <div className="fixed bottom-16 mb-2 sm:mb-0 md:mb-0 left-0 w-full h-6 bg-gradient-to-b from-transparent to-white dark:from-transparent dark:to-gray-900 pointer-events-none z-50 sm:bottom-0"></div>
 
       <nav className={`lg:hidden fixed bottom-0 left-0 w-full py-4 ${darkMode ? 'bg-gray-900 shadow-lg shadow-gray-800/100' : 'bg-white shadow-lg shadow-gray-200/100'}`}>
       
