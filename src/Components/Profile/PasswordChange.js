@@ -5,7 +5,7 @@ import { BASE_URL } from '../Urls/Urls';
 import { Link } from 'react-router-dom';
 
 const PasswordChange = ({ user, setView, isForgot }) => {
-      const [ loading, setLoading ] = useState(false)
+    const [ loading, setLoading ] = useState(false)
     const [formData, setFormData] = useState({
         previousPassword: '',
         newPassword: '',
@@ -111,7 +111,7 @@ const PasswordChange = ({ user, setView, isForgot }) => {
 
     return (
         <div className=" bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg mt-8 p-6">
+            <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg mt-8 mb-12 sm:mb-0 p-6">
                 <div className="mb-6">
                     <h2 className="text-2xl font-bold flex items-center gap-2 text-gray-900 dark:text-white">
                         <LockIcon className="w-6 h-6" />
@@ -153,6 +153,9 @@ const PasswordChange = ({ user, setView, isForgot }) => {
                                     {showPasswords.previous ? <EyeOffIcon className="w-4 h-4" /> : <EyeIcon className="w-4 h-4" />}
                                 </button>
                             </div>
+                            <button onClick={()=>setView('forgot')} className="block text-center text-blue-500 dark:text-blue-400 text-sm hover:underline">
+                                        Forgot Password?
+                                      </button>
                         </div>
                     )}
 
