@@ -45,8 +45,7 @@ const OrderList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 text-black dark:bg-gray-900 mt-10 dark:text-white py-8">
-
+    
     <div className="min-h-screen bg-gray-50 text-black dark:bg-gray-900 dark:text-white mt-12 py-8">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -212,7 +211,7 @@ const OrderList = () => {
         )}
       </div>
     </div>
-   </div>
+    
   );
 };
 
