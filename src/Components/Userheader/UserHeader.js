@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link for routing
 import {
   CircleUserRound,
@@ -8,7 +8,7 @@ import {
   ShoppingCart,
   Sun,
 } from 'lucide-react'; // Import icons from lucide-react
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'; // Import dropdown components
+import { Menu } from '@headlessui/react'; // Using Headless UI's Menu components
 import { ChevronDownIcon } from '@heroicons/react/20/solid'; // Import Chevron icon
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'; // Import ellipsis icon
 
@@ -19,8 +19,6 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
   };
 
   return (
-
-    
     <header
       className={`fixed top-0 z-50 w-full ${
         darkMode
@@ -47,7 +45,12 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
               to="/cart"
             >
               <i className="fas fa-shopping-cart mr-2"></i>
-              Cart {user ? <span className="bg-blue-600 text-white rounded-full px-2 text-xs">{cartCount}</span> : ''}
+              Cart{' '}
+              {user && (
+                <span className="bg-blue-600 text-white rounded-full px-2 text-xs">
+                  {cartCount}
+                </span>
+              )}
             </Link>
           </li>
         </ul>
@@ -57,76 +60,101 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
           {user ? (
             <Menu as="div" className="relative inline-block text-left">
               <div>
-                <MenuButton
+                <Menu.Button
                   className={`inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold ${
-                    darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-white text-gray-900 hover:bg-gray-50'
+                    darkMode
+                      ? 'bg-gray-800 text-white hover:bg-gray-700'
+                      : 'bg-white text-gray-900 hover:bg-gray-50'
                   } shadow-sm ring-1 ring-inset ring-gray-300`}
                 >
                   {user.Name}/Profile
-                  <ChevronDownIcon aria-hidden="true" className="-mr-1 w-5 h-5 text-gray-400" />
-                </MenuButton>
+                  <ChevronDownIcon
+                    aria-hidden="true"
+                    className="-mr-1 w-5 h-5 text-gray-400"
+                  />
+                </Menu.Button>
               </div>
 
-              <MenuItems
-                transition
+              <Menu.Items
                 className={`absolute right-0 z-[60] mt-2 w-56 origin-top-right rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none ${
                   darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
                 }`}
               >
                 <div className="py-1">
-                  <MenuItem className="flex items-center">
-                    {user && (
+                  <Menu.Item>
+                    {({ active }) => (
                       <Link
-                        className={`flex items-center px-4 py-2 text-sm ${
-                          darkMode ? 'text-white hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                        }`}
                         to="/profile"
+                        className={`flex items-center px-4 py-2 text-sm ${
+                          active
+                            ? darkMode
+                              ? 'bg-gray-700 text-white'
+                              : 'bg-gray-100 text-gray-900'
+                            : darkMode
+                            ? 'text-white'
+                            : 'text-gray-700'
+                        }`}
                       >
                         <CircleUserRound className="w-4 h-4 mr-2" /> Profile
                       </Link>
                     )}
-                  </MenuItem>
-
-                  <MenuItem>
-                    {user && (
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
                       <Link
-                        className={`block px-4 py-2 text-sm ${
-                          darkMode ? 'text-white hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                        }`}
                         to="/orders"
+                        className={`block px-4 py-2 text-sm ${
+                          active
+                            ? darkMode
+                              ? 'bg-gray-700 text-white'
+                              : 'bg-gray-100 text-gray-900'
+                            : darkMode
+                            ? 'text-white'
+                            : 'text-gray-700'
+                        }`}
                       >
                         Orders
                       </Link>
                     )}
-                  </MenuItem>
-
-                  <MenuItem>
-                    {user && (
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
                       <Link
-                        className={`block px-4 py-2 text-sm ${
-                          darkMode ? 'text-white hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                        }`}
                         to="/wishlist"
+                        className={`block px-4 py-2 text-sm ${
+                          active
+                            ? darkMode
+                              ? 'bg-gray-700 text-white'
+                              : 'bg-gray-100 text-gray-900'
+                            : darkMode
+                            ? 'text-white'
+                            : 'text-gray-700'
+                        }`}
                       >
                         Wishlist
                       </Link>
                     )}
-                  </MenuItem>
-
-                  <form action="#" method="POST">
-                    <MenuItem>
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
                       <Link
                         to="/logout"
                         className={`block px-4 py-2 text-sm ${
-                          darkMode ? 'text-white hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                          active
+                            ? darkMode
+                              ? 'bg-gray-700 text-white'
+                              : 'bg-gray-100 text-gray-900'
+                            : darkMode
+                            ? 'text-white'
+                            : 'text-gray-700'
                         }`}
                       >
                         Log Out
                       </Link>
-                    </MenuItem>
-                  </form>
+                    )}
+                  </Menu.Item>
                 </div>
-              </MenuItems>
+              </Menu.Items>
             </Menu>
           ) : (
             <Link to="/login">
@@ -143,10 +171,11 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
           )}
         </div>
 
+        {/* Search Icon */}
         <div>
           <Link to="/search">
             <span
-              className="cursor-pointer input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
+              className="cursor-pointer flex items-center whitespace-nowrap rounded px-3 py-1.5 text-base font-normal text-neutral-700 dark:text-neutral-200"
               id="basic-addon2"
             >
               <svg
@@ -173,73 +202,50 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
           {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
         </div>
 
+        {/* Ellipsis Dropdown */}
         <Menu as="div" className="relative inline-block text-left">
           <div>
-            <MenuButton
+            <Menu.Button
               className={`inline-flex justify-center items-center p-2 rounded-full ${
                 darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-white text-gray-900 hover:bg-gray-50'
               } shadow-sm ring-1 ring-gray-300`}
             >
-
-              <EllipsisVerticalIcon className="h-4 w-4 " />
-
               <EllipsisVerticalIcon className="h-4 w-4" />
-            </MenuButton>
+              <EllipsisVerticalIcon className="h-4 w-4" />
+            </Menu.Button>
           </div>
-
-          <MenuItems
-            transition
-            className="absolute right-0 z-[60] mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+          <Menu.Items
+            className={`absolute right-0 z-[60] mt-2 w-48 origin-top-right rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none ${
+              darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
+            }`}
           >
-
-           <div className="py-1">
+            <div className="py-1">
               <Menu.Item>
-  {({ active }) => (
-    <button
-      className={`${active ? 
-        (darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-900 text-white hover:bg-gray-700')
-        : 'text-gray-700 hover:bg-gray-200'} block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
-    >
-    </button>
-    {({ active }) => (
-      <button
-        className={`${active ? 
-          (darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-900 text-white hover:bg-gray-700')
-          : 'text-gray-700 hover:bg-gray-200'} block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
-        onClick={() => console.log('Download App clicked')}
-      >
-        Download App
-      </button>
-    )}
-</Menu.Item>
-
+                {({ active }) => (
+                  <button
+                    onClick={() => console.log('Download App clicked')}
+                    className={`block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out ${
+                      active
+                        ? darkMode
+                          ? 'bg-gray-800 text-white hover:bg-gray-700'
+                          : 'bg-gray-900 text-white hover:bg-gray-700'
+                        : 'text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    Download App
+                  </button>
+                )}
+              </Menu.Item>
             </div>
           </Menu.Items>
         </Menu>
       </nav>
 
+      {/* Overlays */}
       <div className="fixed top-18 left-0 w-full h-8 bg-transparent dark:bg-gradient-to-b dark:from-gray-900 dark:to-transparent pointer-events-none z-50"></div>
-
+      <div className="fixed bottom-16 mb-2 sm:mb-0 md:mb-0 left-0 w-full h-6 bg-gradient-to-b from-transparent to-white dark:from-transparent dark:to-gray-900 pointer-events-none z-50 sm:bottom-0"></div>
 
       {/* Bottom navigation for mobile view */}
-      <div className="fixed bottom-16 mb-2 sm:mb-0 md:mb-0 left-0 w-full h-6 bg-gradient-to-b from-transparent to-white dark:from-transparent dark:to-gray-900 pointer-events-none z-50 sm:bottom-0"></div>
-
-      <nav className={`lg:hidden fixed bottom-0 left-0 w-full py-4 ${darkMode ? 'bg-gray-900 shadow-lg shadow-gray-800/100' : 'bg-white shadow-lg shadow-gray-200/100'}`}>
-      
-              </MenuItem>
-            </div>
-          </MenuItems>
-        </Menu>
-      </nav>
-
-      {/* Overlay Div – its z-index is 50.
-          Since our dropdowns now have z-index 60, they will appear above this overlay.
-          If you instead wish to hide this overlay when a dropdown is open, you’d need to conditionally render or hide it. */}
-      <div className="fixed top-18 left-0 w-full h-8 bg-transparent dark:bg-gradient-to-b dark:from-gray-900 dark:to-transparent pointer-events-none z-50"></div>
-
-      {/* Bottom overlay for mobile view */}
-      <div className="fixed bottom-16 mb-2 sm:mb-0 md:mb-0 left-0 w-full h-6 bg-gradient-to-b from-transparent to-white dark:from-transparent dark:to-gray-900 pointer-events-none z-50 sm:bottom-0"></div>
-
       <nav
         className={`lg:hidden fixed bottom-0 left-0 w-full py-4 ${
           darkMode ? 'bg-gray-900 shadow-lg shadow-gray-800/100' : 'bg-white shadow-lg shadow-gray-200/100'
@@ -248,33 +254,26 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
         <ul className="flex justify-around items-center">
           <li>
             <Link
-              className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${
+              className={`flex flex-col items-center transition duration-300 ${
                 darkMode ? 'text-white' : 'text-gray-700'
-              }`}
+              } hover:text-blue-600`}
               to="/"
             >
               <House color={darkMode ? '#ffffff' : '#0d0d0d'} strokeWidth={2} />
               Home
             </Link>
           </li>
-
           <li>
-
-            <Link className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${darkMode ? 'text-white' : 'text-gray-700'}`} to="/cart">
-              <div className="cart-icon-container">
-                <ShoppingCart color={darkMode ? "#ffffff" : "#0d0d0d"} />
-                {cartCount > 0 && (
-                  <span className="mt-2 cart-count-badge">
             <Link
-              className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${
+              className={`flex flex-col items-center transition duration-300 ${
                 darkMode ? 'text-white' : 'text-gray-700'
-              }`}
+              } hover:text-blue-600`}
               to="/cart"
             >
-              <div className="cart-icon-container relative">
+              <div className="relative">
                 <ShoppingCart color={darkMode ? '#ffffff' : '#0d0d0d'} />
                 {cartCount > 0 && (
-                  <span className="mt-2 cart-count-badge absolute -top-2 -right-2 bg-blue-600 text-white rounded-full px-1 text-xs">
+                  <span className="absolute -top-2 -right-2 bg-blue-600 text-white rounded-full px-1 text-xs">
                     {cartCount}
                   </span>
                 )}
@@ -284,21 +283,20 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
           </li>
           <li>
             <Link
-              className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${
+              className={`flex flex-col items-center transition duration-300 ${
                 darkMode ? 'text-white' : 'text-gray-700'
-              }`}
+              } hover:text-blue-600`}
               to="/orders"
             >
               <Package2 color={darkMode ? '#ffffff' : '#0d0d0d'} />
               Orders
             </Link>
           </li>
-
           <li>
             <Link
-              className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${
+              className={`flex flex-col items-center transition duration-300 ${
                 darkMode ? 'text-white' : 'text-gray-700'
-              }`}
+              } hover:text-blue-600`}
               to="/profile"
             >
               <CircleUserRound color={darkMode ? '#ffffff' : '#0d0d0d'} />
