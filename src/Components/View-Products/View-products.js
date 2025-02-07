@@ -124,7 +124,7 @@ const ProductAndCategoryList = ({ setCartCount }) => {
   };
 
   return (
-    <div className="transition-all  duration-300 mt-5">
+    
 
     <div className="transition-all  duration-300 ">
 
