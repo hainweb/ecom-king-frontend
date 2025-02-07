@@ -194,32 +194,25 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
 
            <div className="py-1">
               <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${active ? 
-                      (darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-900 text-white hover:bg-gray-700') 
-                      : 'text-gray-700 hover:bg-gray-200'} 
-                      block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
+  {({ active }) => (
+    <button
+      className={`${active ? 
+        (darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-900 text-white hover:bg-gray-700')
+        : 'text-gray-700 hover:bg-gray-200'} block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
+    >
+    </button>
+    {({ active }) => (
+      <button
+        className={`${active ? 
+          (darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-900 text-white hover:bg-gray-700')
+          : 'text-gray-700 hover:bg-gray-200'} block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
+        onClick={() => console.log('Download App clicked')}
+      >
+        Download App
+      </button>
+    )}
+</Menu.Item>
 
-            
-              </button>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active
-                        ? darkMode
-                          ? 'bg-gray-800 text-white hover:bg-gray-700'
-                          : 'bg-gray-900 text-white hover:bg-gray-700'
-                        : 'text-gray-700 hover:bg-gray-200'
-                    } block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
-
-                    onClick={() => console.log('Download App clicked')}
-                  >
-                    Download App
-                  </button>
-                )}
-
-              </Menu.Item>
             </div>
           </Menu.Items>
         </Menu>
