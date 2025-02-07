@@ -212,6 +212,7 @@ const OrderList = () => {
         )}
       </div>
     </div>
+   </div>
   );
 };
 
