@@ -140,11 +140,8 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                     {loading ?
                         <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
                         :
-<<<<<<< HEAD
                         { submitButtonText }
-=======
                         'Submit'
->>>>>>> 74c7473 (Chaged file)
                     }
                 </button>
                 {onCancel && (
