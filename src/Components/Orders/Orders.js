@@ -45,11 +45,10 @@ const OrderList = () => {
   }
 
   return (
-<<<<<<< HEAD
     <div className="min-h-screen bg-gray-50 text-black dark:bg-gray-900 mt-10 dark:text-white py-8">
-=======
+
     <div className="min-h-screen bg-gray-50 text-black dark:bg-gray-900 dark:text-white mt-12 py-8">
->>>>>>> 74c7473 (Chaged file)
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {orders && orders.length > 0 ? (
           <>
