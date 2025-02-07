@@ -19,10 +19,9 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
   };
 
   return (
-<<<<<<< HEAD
+
     <header className={`fixed top-0 z-50 w-full ${darkMode ? 'bg-gray-900 text-white shadow-lg shadow-gray-800/100' : 'bg-white text-gray-800 shadow-lg shadow-gray-200/100'} transition-all ease-in-out`}>
       
-=======
     <header
       className={`fixed top-0 z-50 w-full ${
         darkMode
@@ -30,7 +29,6 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
           : 'bg-white text-gray-800 shadow-lg shadow-gray-200/100'
       } transition-all ease-in-out`}
     >
->>>>>>> 74c7473 (Chaged file)
       <nav className="navbar navbar-expand-lg navbar-light p-4 flex justify-between items-center max-w-screen-xl mx-auto">
         {/* Brand/logo */}
         <Link
@@ -183,11 +181,10 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
                 darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-white text-gray-900 hover:bg-gray-50'
               } shadow-sm ring-1 ring-gray-300`}
             >
-<<<<<<< HEAD
+
               <EllipsisVerticalIcon className="h-4 w-4 " />
-=======
+
               <EllipsisVerticalIcon className="h-4 w-4" />
->>>>>>> 74c7473 (Chaged file)
             </MenuButton>
           </div>
 
@@ -195,7 +192,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
             transition
             className="absolute right-0 z-[60] mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
           >
-<<<<<<< HEAD
+
            <div className="py-1">
               <Menu.Item>
                 {({ active }) => (
@@ -204,7 +201,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
                       (darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-900 text-white hover:bg-gray-700') 
                       : 'text-gray-700 hover:bg-gray-200'} 
                       block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
-=======
+
             <div className="py-1">
               <MenuItem>
                 {({ active }) => (
@@ -216,13 +213,13 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
                           : 'bg-gray-900 text-white hover:bg-gray-700'
                         : 'text-gray-700 hover:bg-gray-200'
                     } block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
->>>>>>> 74c7473 (Chaged file)
+
                     onClick={() => console.log('Download App clicked')}
                   >
                     Download App
                   </button>
                 )}
-<<<<<<< HEAD
+
               </Menu.Item>
             </div>
           </Menu.Items>
@@ -237,7 +234,6 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
 
       <nav className={`lg:hidden fixed bottom-0 left-0 w-full py-4 ${darkMode ? 'bg-gray-900 shadow-lg shadow-gray-800/100' : 'bg-white shadow-lg shadow-gray-200/100'}`}>
       
-=======
               </MenuItem>
             </div>
           </MenuItems>
@@ -257,7 +253,6 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
           darkMode ? 'bg-gray-900 shadow-lg shadow-gray-800/100' : 'bg-white shadow-lg shadow-gray-200/100'
         }`}
       >
->>>>>>> 74c7473 (Chaged file)
         <ul className="flex justify-around items-center">
           <li>
             <Link
@@ -272,13 +267,12 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
           </li>
 
           <li>
-<<<<<<< HEAD
+
             <Link className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${darkMode ? 'text-white' : 'text-gray-700'}`} to="/cart">
               <div className="cart-icon-container">
                 <ShoppingCart color={darkMode ? "#ffffff" : "#0d0d0d"} />
                 {cartCount > 0 && (
                   <span className="mt-2 cart-count-badge">
-=======
             <Link
               className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${
                 darkMode ? 'text-white' : 'text-gray-700'
@@ -289,7 +283,6 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
                 <ShoppingCart color={darkMode ? '#ffffff' : '#0d0d0d'} />
                 {cartCount > 0 && (
                   <span className="mt-2 cart-count-badge absolute -top-2 -right-2 bg-blue-600 text-white rounded-full px-1 text-xs">
->>>>>>> 74c7473 (Chaged file)
                     {cartCount}
                   </span>
                 )}
@@ -297,11 +290,6 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
               Cart
             </Link>
           </li>
-<<<<<<< HEAD
-          
-=======
-
->>>>>>> 74c7473 (Chaged file)
           <li>
             <Link
               className={`flex flex-col items-center text-gray-700 hover:text-blue-600 transition duration-300 ${
@@ -327,10 +315,6 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
           </li>
         </ul>
       </nav>
-<<<<<<< HEAD
-      
-=======
->>>>>>> 74c7473 (Chaged file)
     </header>
   );
 }
