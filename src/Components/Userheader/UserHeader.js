@@ -201,7 +201,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
                       : 'text-gray-700 hover:bg-gray-200'} 
                       block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
 
-            <div className="py-1">
+            
               <MenuItem>
                 {({ active }) => (
                   <button
