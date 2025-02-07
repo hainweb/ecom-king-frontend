@@ -17,7 +17,7 @@ const ProfilePage = ({ user }) => {
 
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col items-center">
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col mt-2 items-center">
 
             <div className="w-full bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 dark:from-blue-700 dark:via-blue-800 dark:to-blue-900 mt-36 sm:mt-20 md:mt-20">
                 <div

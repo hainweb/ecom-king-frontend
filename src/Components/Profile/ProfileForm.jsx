@@ -13,6 +13,7 @@ const ProfileForm = ({ user }) => {
         Gender: user?.Gender || "",
         Email: user?.Email || "",
         Mobile: user?.Mobile || "",
+        CreatedAt:user?.CreatedAt||''
     });
 
     const handleProfileChange = (e) => {
@@ -155,7 +156,11 @@ const ProfileForm = ({ user }) => {
                         readOnly
                     />
                 </div>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+  Created on {new Date(profileData.CreatedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+</p>
 
+ 
                 {/* Action buttons */}
                 <div className="flex justify-end mt-4 space-x-2">
                     {isEditing ? (

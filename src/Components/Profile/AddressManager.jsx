@@ -22,15 +22,23 @@ const AddressManager = ({ view, setView, user }) => {
 
     useEffect(() => {
         const fetchAddresses = async () => {
+<<<<<<< HEAD
             setLoading(true)
+=======
+            
+>>>>>>> 74c7473 (Chaged file)
             try {
+               setLoading(true)
                 const response = await axios.get(
                     `${BASE_URL}/get-address`,
                     { withCredentials: true }
                 );
+                setLoading(false)
                 if (response.data.status) {
                     setAddresses(response.data.userAddress);
+                    setAddressLoading(false)
                 }
+                setLoading(false)
             } catch (error) {
                 console.error("Error fetching addresses:", error);
                 alert("Failed to fetch addresses. Please try again later.");
@@ -170,6 +178,8 @@ const AddressManager = ({ view, setView, user }) => {
                                     addressData,
                                     { withCredentials: true }
                                 );
+                                console.log('reghbbns',response);
+                                
                                 if (response.data.status) {
                                     setAddresses(response.data.address);
                                     setAddressData({

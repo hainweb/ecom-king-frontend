@@ -9,7 +9,11 @@ const Signup = ({ setUser, setCartCount }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
+<<<<<<< HEAD
     Name: "",
+=======
+    Name: "", 
+>>>>>>> 74c7473 (Chaged file)
     LastName: "",
     Gender: "",
     Email: "",

@@ -18,6 +18,10 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
         if (!addressData.Mobile) newErrors.Mobile = "Mobile is required.";
         if (!addressData.Address) newErrors.Address = "Address is required.";
         if (!addressData.Pincode) newErrors.Pincode = "Pincode is required.";
+        if (addressData.Pincode.length<6) newErrors.Pincode = "Enter a valid Pincode";
+        if (addressData.Address.length<8) newErrors.Address = "Enter a valid Address";
+        if (addressData.Mobile.length<10) newErrors.Mobile = "Enter a valid Mobile";
+        if (addressData.City.length<4) newErrors.Pincode = "Enter a valid City";
         if (!addressData.State) newErrors.State = "State is required.";
         if (!addressData.City) newErrors.City = "City is required.";
         if (!addressData.Type) newErrors.Type = "Address type is required.";
@@ -136,7 +140,11 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                     {loading ?
                         <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
                         :
+<<<<<<< HEAD
                         { submitButtonText }
+=======
+                        'Submit'
+>>>>>>> 74c7473 (Chaged file)
                     }
                 </button>
                 {onCancel && (

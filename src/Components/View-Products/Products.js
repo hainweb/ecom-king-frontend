@@ -118,6 +118,8 @@ const ProductDisplay = ({ setCartCount }) => {
     axios
       .get(`${BASE_URL}/add-to-cart/${productId}`, { withCredentials: true })
       .then((response) => {
+        console.log('resokdjd',response);
+         
         if (response.data.status) {
           setCartCount((prevCount) => prevCount + 1);
         }
@@ -187,6 +189,26 @@ const ProductDisplay = ({ setCartCount }) => {
       )}
     </button>
   );
+
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'document.title',
+          text: "Check out this page!",
+          url: window.location.href,
+        });
+        console.log("Content shared successfully");
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
+    } else {
+      // Fallback for browsers that do not support the Web Share API
+      alert("System sharing is not supported on this browser. Please copy the link manually.");
+    }
+  };
+
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 mt-12">
@@ -304,9 +326,12 @@ const ProductDisplay = ({ setCartCount }) => {
                 </button>
 
 
-                <button className="p-2 rounded-full border border-gray-300 dark:border-gray-600 text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                  <Share2 className="w-6 h-6" />
-                </button>
+                <button
+      onClick={handleShare}
+      className="p-2 rounded-full border border-gray-300 dark:border-gray-600 text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+    >
+      <Share2 className="w-6 h-6" />
+    </button>
               </div>
             </div>
 

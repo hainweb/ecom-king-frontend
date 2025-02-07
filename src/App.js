@@ -37,7 +37,7 @@ function App() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/products`, { withCredentials: true });
+        const response = await axios.get(`${BASE_URL}/home`, { withCredentials: true });
         setCartCount(response.data.cartCount);
         setUser(response.data.user);
       } catch (error) {

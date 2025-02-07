@@ -41,7 +41,7 @@ function BestOfElectronic() {
             <section className="bg-white dark:bg-gray-900 py-8">
                 <div className="container mx-auto px-4">
                     <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 capitalize">
-                        Best Of Electronic Products
+                        Best Of Mobile Products
                     </h1>
 
                     {loading ? (

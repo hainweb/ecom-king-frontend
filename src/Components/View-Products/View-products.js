@@ -124,7 +124,11 @@ const ProductAndCategoryList = ({ setCartCount }) => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="transition-all  duration-300 mt-5">
+=======
+    <div className="transition-all  duration-300 ">
+>>>>>>> 74c7473 (Chaged file)
 
       <div className="py-2 mt-20 bg-gray-100 dark:bg-gray-800">
         <Slider />
