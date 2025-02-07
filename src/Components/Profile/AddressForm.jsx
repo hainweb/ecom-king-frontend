@@ -140,7 +140,7 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
                     {loading ?
                         <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
                         :
-                        { submitButtonText }
+                        
                         'Submit'
                     }
                 </button>
