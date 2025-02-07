@@ -4,7 +4,7 @@ import axios from 'axios';
 import { BASE_URL } from '../Urls/Urls';
 import { Link } from 'react-router-dom';
 
-const OrderList = () => {
+const OrderList = () => { 
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState([]);
 
