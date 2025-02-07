@@ -20,8 +20,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
 
   return (
 
-    <header className={`fixed top-0 z-50 w-full ${darkMode ? 'bg-gray-900 text-white shadow-lg shadow-gray-800/100' : 'bg-white text-gray-800 shadow-lg shadow-gray-200/100'} transition-all ease-in-out`}>
-      
+    
     <header
       className={`fixed top-0 z-50 w-full ${
         darkMode
