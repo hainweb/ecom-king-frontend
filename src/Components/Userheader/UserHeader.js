@@ -211,7 +211,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
               } shadow-sm ring-1 ring-gray-300`}
             >
               <EllipsisVerticalIcon className="h-4 w-4" />
-              <EllipsisVerticalIcon className="h-4 w-4" />
+              
             </Menu.Button>
           </div>
           <Menu.Items
