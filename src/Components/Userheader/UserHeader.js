@@ -202,7 +202,7 @@ function UserHeader({ cartCount, user, darkMode, setDarkMode }) {
                       block px-4 py-2 text-sm w-full text-left rounded-md transition-colors duration-200 ease-in-out`}
 
             
-              <MenuItem>
+              
                 {({ active }) => (
                   <button
                     className={`${
