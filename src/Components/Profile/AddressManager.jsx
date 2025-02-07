@@ -22,11 +22,8 @@ const AddressManager = ({ view, setView, user }) => {
 
     useEffect(() => {
         const fetchAddresses = async () => {
-<<<<<<< HEAD
             setLoading(true)
-=======
-            
->>>>>>> 74c7473 (Chaged file)
+        
             try {
                setLoading(true)
                 const response = await axios.get(
