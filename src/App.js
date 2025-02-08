@@ -92,7 +92,7 @@ function App() {
             <Route path="/login" element={<Login setCartCount={setCartCount} setUser={setUser} />} />
             <Route path="/signup" element={<Signup setUser={setUser} setCartCount={setCartCount} />} />
             <Route path="/logout" element={<Logout setUser={setUser} setCartCount={setCartCount} />} />
-            <Route path="/cart" element={<Cart setCartCount={setCartCount} />} />
+            <Route path="/cart" element={user ? <Cart setCartCount={setCartCount} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
             <Route path="/orders" element={<ProtectedRoute component={OrderList} />} />
             <Route path="/place-order" element={user ? <PlaceOrder setCartCount={setCartCount} setSuccess={setSuccess} /> : <Login setUser={setUser} setCartCount={setCartCount} />} />
             <Route path="/order-success" element={success ? <OrderSuccess /> : <ProductList setCartCount={setCartCount} />} />
