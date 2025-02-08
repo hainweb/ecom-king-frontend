@@ -231,7 +231,9 @@ const PasswordChange = ({ user, setView, isForgot }) => {
                         className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white rounded-lg transition-colors duration-200 disabled:cursor-not-allowed"
                     >
                         {loading ?
-                            <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+                            <div className="flex space-x-1">
+                 <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
+              </div>
                             :
                             'Change Password'
                         }
