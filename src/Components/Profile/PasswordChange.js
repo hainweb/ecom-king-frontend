@@ -228,7 +228,7 @@ const PasswordChange = ({ user, setView, isForgot }) => {
                     <button
                         type="submit"
                         disabled={timeLeft > 0 || passwordStrength.score < 2}
-                        className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white rounded-lg transition-colors duration-200 disabled:cursor-not-allowed"
+                        className="w-full flex py-2 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white rounded-lg transition-colors duration-200 disabled:cursor-not-allowed"
                     >
                         {loading ?
                             <div className="flex space-x-1">
