@@ -237,8 +237,7 @@ const PasswordChange = ({ user, setView, isForgot }) => {
     }
 </button>
                             
-                            
-                        }
+                        
                     
                 </form>
             </div>
