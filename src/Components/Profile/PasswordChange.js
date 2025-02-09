@@ -224,7 +224,7 @@ const PasswordChange = ({ user, setView, isForgot }) => {
                             </button>
                         </div>
                     </div>     
-                {loading ?
+        
                     <button
     type="submit"
     disabled={timeLeft > 0 || passwordStrength.score < 2}
