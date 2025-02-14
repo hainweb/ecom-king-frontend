@@ -64,10 +64,10 @@ const ProductAndCategoryList = ({ setCartCount }) => {
   }, []);
 
   const toggleWishlist = useCallback((event, productId) => {
-    setWishlistLoadingId(productId);
+    
     event.preventDefault();
     event.stopPropagation();
-
+setWishlistLoadingId(productId)
     axios
       .get(`${BASE_URL}/add-to-Wishlist/${productId}`, { withCredentials: true })
       .then((response) => {
