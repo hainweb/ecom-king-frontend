@@ -211,7 +211,7 @@ const ProductDisplay = ({ setCartCount }) => {
 
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 mt-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 mt-12 mb-12">
       {/* Notification */}
       {showNotification && (
         <div
@@ -223,7 +223,7 @@ const ProductDisplay = ({ setCartCount }) => {
 
       )}
 
-      {/* Theme Toggle */}
+      {/* Theme Toggle 
       <button
         onClick={() => setIsDarkMode(!isDarkMode)}
         className="fixed top-4 right-4 z-40 p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all"
@@ -233,7 +233,7 @@ const ProductDisplay = ({ setCartCount }) => {
         ) : (
           <Moon className="w-6 h-6 text-gray-700" />
         )}
-      </button>
+      </button> */}
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -272,6 +272,9 @@ const ProductDisplay = ({ setCartCount }) => {
                   {product.Name}
                 </h1>
               </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <span className="font-medium">{product.Description}</span> 
+                  </div>
               <div className="mt-4 flex items-center gap-4">
                 <span className="px-4 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm flex items-center gap-2">
                   <Star className="w-4 h-4" />
