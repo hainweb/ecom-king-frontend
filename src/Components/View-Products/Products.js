@@ -65,7 +65,9 @@ const ProductDisplay = ({ setCartCount }) => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+const [showFullDescription, setShowFullDescription] = useState(false);
 
+  
   const navigate = useNavigate();
 
 
@@ -273,8 +275,31 @@ const ProductDisplay = ({ setCartCount }) => {
                 </h1>
               </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">
-                    <span className="font-medium">{product.Description}</span> 
-                  </div>
+  {showFullDescription ? (
+    <>
+      <span className="font-medium">{product.Description}</span>
+      <button
+        onClick={() => setShowFullDescription(false)}
+        className="text-blue-500 text-sm ml-1"
+      >
+        show less
+      </button>
+    </>
+  ) : (
+    <span className="font-medium block overflow-hidden whitespace-nowrap text-ellipsis">
+      {product.Description}
+    </span>
+  )}
+  {!showFullDescription && (
+    <button
+      onClick={() => setShowFullDescription(true)}
+      className="text-blue-500 text-sm ml-1"
+    >
+      show more
+    </button>
+  )}
+</div>
+
               <div className="mt-4 flex items-center gap-4">
                 <span className="px-4 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm flex items-center gap-2">
                   <Star className="w-4 h-4" />
