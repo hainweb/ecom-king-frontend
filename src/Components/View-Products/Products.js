@@ -213,7 +213,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
 
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 mt-12 mb-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 mt-12 mb-14">
       {/* Notification */}
       {showNotification && (
         <div
