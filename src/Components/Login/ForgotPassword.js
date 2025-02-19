@@ -53,6 +53,7 @@ const ForgotPassword = ({ loginedUser }) => {
           console.log('user', user);
           setLoading(false)
         } else {
+          setLoading(false)
           setMessage(response.data.message)
         }
 
