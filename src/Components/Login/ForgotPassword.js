@@ -306,7 +306,7 @@ const ForgotPassword = ({ loginedUser }) => {
                 </div>
 
                 {message && (
-                  <div className="p-4 text-center text-sm">
+                  <div className="p-4 text-red-600 text-center text-sm">
                     <p>{message}</p>
                   </div>
                 )}
