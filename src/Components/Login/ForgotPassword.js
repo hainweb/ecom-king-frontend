@@ -64,6 +64,7 @@ const ForgotPassword = ({ loginedUser }) => {
 
 
     } else {
+      setLoading(false)
       setMessage('Please enter a valid 10-digit mobile number.');
     }
 
