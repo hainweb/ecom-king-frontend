@@ -36,7 +36,7 @@ const AddressForm = ({ addressData, setAddressData, onSubmit, submitButtonText, 
     };
 
     return (
-        <div className="mt-4 space-y-4 min-h-screen overflow-y-auto bg-white dark:bg-gray-800 sm:mb-20 md:mb-0">
+        <div className="mt-4 space-y-4 min-h-screen overflow-y-auto bg-white dark:bg-gray-800 mb-10 sm:mb-20 md:mb-0">
 
             <div className="w-full">
                 <input
