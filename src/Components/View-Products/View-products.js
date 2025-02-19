@@ -128,7 +128,7 @@ setWishlistLoadingId(productId)
 
     <div className="transition-all  duration-300 ">
 
-      <div className="py-2 mt-20 bg-gray-100 dark:bg-gray-800">
+      <div className="py-2 mt-16 md:mt-20 bg-gray-100 dark:bg-gray-800">
         <Slider />
       </div>
 
