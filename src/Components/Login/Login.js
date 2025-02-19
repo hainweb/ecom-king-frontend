@@ -60,10 +60,7 @@ const Login = ({ setUser, setCartCount }) => {
     if (!formData.Password) {
       newErrors.Password = 'Password is required';
       isValid = false;
-    } else if (formData.Password.length < 6) {
-      newErrors.Password = 'Password must be at least 6 characters long';
-      isValid = false;
-    }
+    } 
 
     setErrors(newErrors);
     return isValid;
