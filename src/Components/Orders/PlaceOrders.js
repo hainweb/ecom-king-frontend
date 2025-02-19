@@ -109,7 +109,7 @@ const PlaceOrderForm = ({ user, setSuccess, setCartCount }) => {
   };
 
   return (
-    <section className="bg-gray-100 dark:bg-gray-800 min-h-screen py-8 mb-6 md:mb-0 mt-16 ">
+    <section className="bg-gray-100 dark:bg-gray-800 min-h-screen py-8 mb-10 md:mb-0 mt-16 ">
       <div className="container mx-auto px-4">
 
         {productLoading ?
