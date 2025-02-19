@@ -96,7 +96,7 @@ const AddressManager = ({ view, setView, user }) => {
                             addresses.map((addr) => (
                                 <div
                                     key={addr._id}
-                                    className="bg-white dark:bg-gray-800 p-4 mb-10 md:mb-0 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                                    className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                                 >
                                     {editingAddressId === addr._id ? (
                                         <AddressForm
@@ -191,6 +191,8 @@ const AddressManager = ({ view, setView, user }) => {
                                         Type: "",
                                     });
                                     setView("manageAddress");
+                                }else{
+                                    alert (response.data.message)
                                 }
                             } catch (error) {
                                 console.error("Error adding address:", error);
