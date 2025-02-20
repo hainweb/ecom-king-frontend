@@ -365,7 +365,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
 
             {/* Options and Quantity */}
             <div className="space-y-4">
-  {product.CustomOptions && product.CustomOptions.length > 0 && 
+  {product.CustomOptions && product.CustomOptions.length >= 0 && 
     product.CustomOptions.map((option, i) => (
       <div key={i}>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
