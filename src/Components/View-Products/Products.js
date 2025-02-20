@@ -400,7 +400,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
 
 
 
-            </div>
+          
 
             {/* Action Buttons */}
             <div className="grid grid-cols-2 gap-4">
