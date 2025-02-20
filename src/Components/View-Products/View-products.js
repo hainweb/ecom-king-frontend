@@ -146,7 +146,7 @@ setWishlistLoadingId(productId)
             <div className="text-red-500 text-center">{errorCategories}</div>
           ) : (
             <div className="overflow-x-auto scrollbar-hidden">
-              <div className="flex space-x-2 sm:space-x-2 md:space-x-8 lg:space-x-10 min-w-max">
+              <div className="flex h-10 md:h-full space-x-2 sm:space-x-6 md:space-x-8 lg:space-x-10 min-w-max">
                 {categories.map((category) => (
                   <Link
                     to={`category/${category.linkTo}`}
@@ -322,12 +322,8 @@ setWishlistLoadingId(productId)
                                 : "text-gray-500 border-gray-300 dark:border-gray-600"
                                 } hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
                                 {wishlistLoadingId === product._id ?
-                                  <Heart
-                                    className={`w-4 h-4 transition-all duration-300 ease-in-out ${product.isInWishlist
-                                        ? "fill-current scale-115 animate-fadeInOut"
-                                        : "scale-100"
-                                      }`}
-                                  />
+                                  <Heart className="w-4 h-4 transition-all duration-300 ease-in-out animate-fadeInOut" />
+       
                                   :
                                   <Heart
                                     className={`w-4 h-4 transition-all duration-300 ease-in-out ${product.isInWishlist
