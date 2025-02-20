@@ -365,7 +365,7 @@ const [showFullDescription, setShowFullDescription] = useState(false);
 
             {/* Options and Quantity */}
             <div className="space-y-4">
-  {product.CustomOptions && product.CustomOptions.length >= 0 && 
+  
   {product.CustomOptions && product.CustomOptions.length > 0 && (
   <div>
     {/* Use the 'name' field as the label text */}
