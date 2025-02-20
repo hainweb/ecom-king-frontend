@@ -365,7 +365,6 @@ const [showFullDescription, setShowFullDescription] = useState(false);
 
             {/* Options and Quantity */}
             <div className="space-y-4">
-  
   {product.CustomOptions && product.CustomOptions.length > 0 && (
   <div>
     {/* Use the 'name' field as the label text */}
@@ -377,10 +376,10 @@ const [showFullDescription, setShowFullDescription] = useState(false);
     <select
       value={selectedOption}
       onChange={(e) => setSelectedOption(e.target.value)}
-      className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 py-2 px-3 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+      className="mt-1 block w-full rounded-lg border-gray-600 dark:border-gray-300 bg-white dark:bg-gray-800 py-2 px-3 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
     >
       {product.CustomOptions[0].values.map((val, index) => (
-        <option key={index} value={val}>
+        <option className="font-medium text-gray-800 dark:text-gray-300" key={index} value={val}>
           {val}
         </option>
       ))}
