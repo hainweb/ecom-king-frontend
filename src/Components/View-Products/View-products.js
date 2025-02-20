@@ -158,7 +158,7 @@ setWishlistLoadingId(productId)
                       alt={category.name}
                       className="object-contain mb-2 rounded-md"
                     />
-                    <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200">{category.name}</h4>
+                    <h4 className="text-s sm:text-sm font-semibold text-gray-800 dark:text-gray-200">{category.name}</h4>
                   </Link>
                 ))}
               </div>
