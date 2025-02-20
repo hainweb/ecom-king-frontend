@@ -146,7 +146,7 @@ setWishlistLoadingId(productId)
             <div className="text-red-500 text-center">{errorCategories}</div>
           ) : (
             <div className="overflow-x-auto scrollbar-hidden">
-              <div className="flex space-x-6 sm:space-x-6 md:space-x-8 lg:space-x-10 min-w-20 sm:min-w-max">
+              <div className="flex space-x-6 sm:space-x-6 md:space-x-8 lg:space-x-10 min-w-25 sm:min-w-max">
                 {categories.map((category) => (
                   <Link
                     to={`category/${category.linkTo}`}
@@ -230,7 +230,7 @@ setWishlistLoadingId(productId)
                             >
                               {wishlistLoadingId === product._id ?
                                 <Heart
-                                  className={`w-4 h-4 transition-all duration-300 ease-in-out fill-current scale-115 animate-fadeInOut
+                                  className={`w-4 h-4 transition-all duration-300 ease-in-out fill-red-500 scale-115 animate-fadeInOut
                                   `}
                                 />
 
