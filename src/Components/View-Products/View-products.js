@@ -146,7 +146,7 @@ setWishlistLoadingId(productId)
             <div className="text-red-500 text-center">{errorCategories}</div>
           ) : (
             <div className="overflow-x-auto scrollbar-hidden">
-              <div className="flex space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10 min-w-[10px] sm:min-w-max">
+              <div className="flex space-x-4 sm:space-x-6 md:space-x-8 lg:space-x-10 min-w-[10px] md:min-w-max">
                 {categories.map((category) => (
                   <Link
                     to={`category/${category.linkTo}`}
