@@ -86,63 +86,7 @@ const ReturnOrder = () => {
     };
 
     return (
-        <div className="p-6 max-w-lg mx-auto bg-white shadow-lg mt-8 rounded-md">
-            <h2 className="text-2xl font-bold mb-4 text-center">Return Product</h2>
-            <form onSubmit={handleSubmit}>
-                <label className="block text-lg font-medium mb-2">
-                    Reason for Return:
-                </label>
-                <div className="space-y-2 mb-4">
-                    {reasons.map((reason) => (
-                        <div key={reason} className="flex items-center">
-                            <input
-                                type="radio"
-                                id={reason}
-                                name="reason"
-                                value={reason}
-                                checked={selectedReason === reason}
-                                onChange={() => handleReasonChange(reason)}
-                                className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                            />
-                            <label htmlFor={reason} className="ml-2 text-gray-700">
-                                {reason}
-                            </label>
-                        </div>
-                    ))}
-                </div>
-
-                {selectedReason === "Other" && (
-                    <div className="mb-4">
-                        <label htmlFor="message" className="block text-lg font-medium mb-2">
-                            Message:
-                        </label>
-                        <textarea
-                            id="message"
-                            rows="4"
-                            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            placeholder="Please provide details for 'Other' reason..."
-                        />
-                    </div>
-                )}
-
-                {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
-
-                <button
-                    type="submit"
-                    className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-                >
-                    {loading ?
-                         <div className="flex justify-center items-center">
-                         <Loader2 className="w-4 h-4 animate-spin dark:text-white" />
-                       </div>
-                        :
-                        'Submit'
-                    }
-                </button>
-            </form>
-=======
+       
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8 items-center justify-center">
   <div className="p-6 max-w-lg mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-md mt-12">
     <h2 className="text-2xl font-bold mb-4 text-center text-gray-900 dark:text-white">
@@ -213,7 +157,6 @@ const ReturnOrder = () => {
       </button>
     </form>
   </div>
-</div>
 </div>
     );
 };
